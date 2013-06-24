@@ -2,11 +2,6 @@
 <meta charset="utf-8">
 <style>
 
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  position: relative;
-  width: 960px;
-}
 
 .axis text {
   font: 10px sans-serif;
@@ -42,25 +37,25 @@ label {
 <script>
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = 550 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
 
-var formatPercent = d3.format(".0%");
+var formatInt = d3.format("d"); //d -> integer (https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format)
 
 var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .1, 1);
+    .rangeRoundBands([0, width], .1, 1); //([], width of individual bar, width of all bars)
 
 var y = d3.scale.linear()
     .range([height, 0]);
 
 var xAxis = d3.svg.axis()
     .scale(x)
-    .orient("bottom");
+    .orient("bottom"); //placement of x axis labels
 
 var yAxis = d3.svg.axis()
     .scale(y)
-    .orient("left")
-    .tickFormat(formatPercent);
+    .orient("left") //placement of y axis labels
+    .tickFormat(formatInt);
 
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -78,7 +73,13 @@ d3.tsv("demoData.tsv", function(error, data) {
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+      .call(xAxis)
+    .append("text")
+      .attr("y", 16)
+      .attr("x", 480)
+      .attr("dx", ".71em")
+      .style("text-anchor", "end")
+      .text("index");
 
   svg.append("g")
       .attr("class", "y axis")
@@ -88,16 +89,16 @@ d3.tsv("demoData.tsv", function(error, data) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Frequency");
+      .text("height");
 
   svg.selectAll(".bar")
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.letter); })
+      .attr("x", function(d) { return x(d.index); })
       .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.frequency); })
-      .attr("height", function(d) { return height - y(d.frequency); });
+      .attr("y", function(d) { return y(d.height); })
+      .attr("height", function(d) { return height - y(d.height); });
 
   d3.select("input").on("change", change);
   $('#next').on("click", sort);
@@ -118,6 +119,7 @@ d3.tsv("demoData.tsv", function(error, data) {
         jj=ii+1;
       }
     }
+
     
     var x0 = x.domain(data.sort(function(a, b) { return b.frequency - a.frequency; })
         .map(function(d) { return d.letter; }))
@@ -129,21 +131,22 @@ d3.tsv("demoData.tsv", function(error, data) {
     transition.selectAll(".bar")
         .delay(delay)
         .attr("x", function(d) { return x0(d.letter); });
-
-    transition.select(".x.axis")
-        .call(xAxis)
-      .selectAll("g")
-        .delay(delay);
+  
+  //   transition.select(".x.axis")
+  //       .call(xAxis)
+  //     .selectAll("g")
+  //       .delay(delay);
+  // }
   }
-
+  
   function change() {
     clearTimeout(sortTimeout);
 
     // Copy-on-write since tweens are evaluated after a delay.
     var x0 = x.domain(data.sort(this.checked
-        ? function(a, b) { return b.frequency - a.frequency; }
-        : function(a, b) { return d3.ascending(a.letter, b.letter); })
-        .map(function(d) { return d.letter; }))
+        ? function(a, b) { return b.height - a.height; } //checked
+        : function(a, b) { return b.index - a.index; })//unchecked
+        .map(function(d) { return d.index; }))
         .copy();
 
     var transition = svg.transition().duration(2000),
@@ -151,7 +154,7 @@ d3.tsv("demoData.tsv", function(error, data) {
 
     transition.selectAll(".bar")
         .delay(delay)
-        .attr("x", function(d) { return x0(d.letter); });
+        .attr("x", function(d) { return x0(d.index); });
 
     transition.select(".x.axis")
         .call(xAxis)

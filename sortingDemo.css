@@ -11,12 +11,19 @@ body {
 }
 
 .demoGraph, .demoCode{
-    height: 500px;
+    height: 100%;
 }
 
-iframe {
-	border:none;
+.demoGraph .demoFile{
+    height: 500px;   
 }
+
+iframe{
+    border:none;
+}
+
+
+/*demoGraph CSS below*/
 
 .axis text {
   font: 10px sans-serif;
@@ -39,7 +46,10 @@ iframe {
 }
 
 label {
+<<<<<<< HEAD
   position: absolute;
+=======
+>>>>>>> 4c8e0b6272f7953ec7cc8910314220f7b63a3bf4
   top: 10px;
   right: 10px;
 }
