@@ -1,46 +1,3 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  position: relative;
-  width: 960px;
-}
-
-.axis text {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.bar {
-  fill: steelblue;
-  fill-opacity: .9;
-}
-
-.x.axis path {
-  display: none;
-}
-
-label {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-</style>
-<label><input type="checkbox"> Sort values</label>
-<button id="next">Sort</button>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script>
-
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -70,10 +27,13 @@ var svg = d3.select("body").append("svg")
 
 d3.tsv("demoData.tsv", function(error, data) {
 
-  var length=data.map(function(d) { return d.letter; }).length;
+  data.forEach(function(d) {
+    d.frequency = +d.frequency;
+  });
 
   x.domain(data.map(function(d) { return d.letter; }));
   y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+
 
   svg.append("g")
       .attr("class", "x axis")
@@ -100,41 +60,10 @@ d3.tsv("demoData.tsv", function(error, data) {
       .attr("height", function(d) { return height - y(d.frequency); });
 
   d3.select("input").on("change", change);
-  $('#next').on("click", sort);
 
   var sortTimeout = setTimeout(function() {
     d3.select("input").property("checked", true).each(change);
   }, 2000);
-
-  function sort(){
-    console.log(data.map(function(d) { return d.letter; }),length);
-    if(ii==undefined || jj==undefined){
-      var ii=0;//index we are considering at
-      var jj=0;
-    }
-    if(jj==length){
-      if(ii<length){
-        ii+=1;
-        jj=ii+1;
-      }
-    }
-    
-    var x0 = x.domain(data.sort(function(a, b) { return b.frequency - a.frequency; })
-        .map(function(d) { return d.letter; }))
-        .copy();
-
-    var transition = svg.transition().duration(2000),
-        delay = function(d, i) { return i * 50; };
-
-    transition.selectAll(".bar")
-        .delay(delay)
-        .attr("x", function(d) { return x0(d.letter); });
-
-    transition.select(".x.axis")
-        .call(xAxis)
-      .selectAll("g")
-        .delay(delay);
-  }
 
   function change() {
     clearTimeout(sortTimeout);
@@ -146,7 +75,7 @@ d3.tsv("demoData.tsv", function(error, data) {
         .map(function(d) { return d.letter; }))
         .copy();
 
-    var transition = svg.transition().duration(2000),
+    var transition = svg.transition().duration(750),
         delay = function(d, i) { return i * 50; };
 
     transition.selectAll(".bar")
@@ -160,4 +89,4 @@ d3.tsv("demoData.tsv", function(error, data) {
   }
 });
 
-</script>
+$('.demoGraph').append(svg);
