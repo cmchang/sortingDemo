@@ -1,0 +1,16 @@
+body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+
+.demoCode{
+    padding-left: 20px;
+}
+
+.demoGraph{
+    padding-right: 20px;
+}
+
+.demoGraph, .demoCode{
+    border: solid black 1px; 
+    height: 500px;
+}
