@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 function setup_Graph(){
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
-        width = 550 - margin.left - margin.right,
+        width = 500 - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
     
     var formatInt = d3.format("d"); //d -> integer (https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format)

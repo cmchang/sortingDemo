@@ -12,6 +12,8 @@
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src = "demoGraph.js"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
 
   </head>
 
@@ -46,11 +48,30 @@
         <p>Filler text. </p>
     </div> <!-- /container -->
 
-    <div class = "row-fluid">
-        <div class = "span4 demoCode">
-        <h3>.demoCode placeholder</h3>
+    <div class = "row-fluid" id = "bubbleSort">
+        <div class = "span6 demoCode">
+            <h3>.demoCode placeholder</h3>
+        
+           <div class = "quineHolder">
+                <pre class="prettyprint linenums">
+procedure bubbleSort( A : list of sortable items ){
+       repeat     
+         swapped = false
+         for i = 1 to length(A) - 1 inclusive do:
+           /* if this pair is out of order */
+           if A[i-1] > A[i] then
+             /* swap them and remember something changed */
+             swap( A[i-1], A[i] )
+             swapped = true
+           end if
+         end for
+       until not swapped
+    end procedure
+    }
+                    </pre>    
+            </div> <!-- quineHolder-->
         </div>
-        <div class = "span8 demoGraph">
+        <div class = "span6 demoGraph">
         <h3>.demoGraph placeholder</h3>
             <div class ="demoGraphJS">
                 <label><input type="checkbox"> Sort values</label>
