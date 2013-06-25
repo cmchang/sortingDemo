@@ -12,7 +12,14 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src = "demoGraph.js"></script>
     <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-      <script src = "bubbleSort.js"></script>
+    <script src = "bubbleSort.js"></script>
+      
+    <script type="text/javascript"> //activates tooptip
+        $(function () {
+            $("[rel='tooltip']").tooltip();
+            $('[rel=tooltip]').tooltip({container: 'body'});
+        });
+    </script>
   </head>
 
   <body>
@@ -46,55 +53,52 @@
         <p>Filler text. </p>
     </div> <!-- /container -->
 
-    <div class = "row-fluid" id = "bubbleSort">
-        <div class = "span6 demoCode">
-            <h3>.demoCode placeholder</h3>
-        
-           <div class = "quineHolder">
-                <pre class="prettyprint linenums">
-procedure bubbleSort( A : list of sortable items ){
-       repeat     
-         swapped = false
-         for i = 1 to length(A) - 1 inclusive do:
-           /* if this pair is out of order */
-           if A[i-1] > A[i] then
-             /* swap them and remember something changed */
-             swap( A[i-1], A[i] )
-             swapped = true
-           end if
-         end for
-       until not swapped
-    end procedure
-    }
-                    </pre>    
-            </div> <!-- quineHolder-->
-        </div>
-        <div class = "span6 demoGraph">
-        <h3>.demoGraph placeholder</h3>
-            <div class ="demoGraphJS">
-                <div class = "btn-group">
-                    <button type="button" class="btn btn-primary btn-small fastBackwardBtn" id = "next">
-                        <i class = "icon-fast-backward"></i> 
-                    </button>
-                    <button type="button" class="btn btn-primary btn-small backBtn">
-                        <i class = "icon-step-backward"></i>
-                    </button>
-                    <button type="button" class="btn btn-primary btn-small pauseBtn">
-                        <i class = "icon-pause"></i></button>
-                    <button type="button" class="btn btn-primary btn-small playBtn">
-                        <i class = "icon-play"></i></button>
-                    <button type="button" class="btn btn-primary btn-small forwardBtn" id = "next">
-                        <i class = "icon-step-forward"></i> 
-                    </button>
-                    <button type="button" class="btn btn-primary btn-small fastForwardBtn" id = "next">
-                        <i class = "icon-fast-forward"></i> 
-                    </button>
-                </div>
-                <label><input type="checkbox"> Sort values</label>
-
+    <div class = "row-fluid" id = "bubbleSort"><!--Main row-fluid -->
+        <div class = "row-fluid" id = "description"> <!-- Description row-fluid -->
+            <div class = "container">
+                <h2 class = "text-info">Bubble Sort</h2>
             </div>
-        </div>
-        <div class = "row-fluid">
+        </div> <!-- End of description row-fluid -->
+        <div class = "row-fluid"><!--Demo row-fluid-->
+            <div class = "span6 demoCode">
+                <h3>.demoCode placeholder</h3>
+            
+               <div class = "quineHolder">
+                    <pre class="prettyprint linenums"> <!-- Adds color and line numbers to quine-->
+    procedure bubbleSort( A : list of sortable items ){
+           repeat     
+             swapped = false
+             for i = 1 to length(A) - 1 inclusive do:
+               /* if this pair is out of order */
+               if A[i-1] > A[i] then
+                 /* swap them and remember something changed */
+                 swap( A[i-1], A[i] )
+                 swapped = true
+               end if
+             end for
+           until not swapped
+        end procedure
+        }
+                        </pre>    
+                </div> <!-- quineHolder-->
+            </div>
+            <div class = "span6 demoGraph">
+            <h3>.demoGraph placeholder</h3>
+                <div class ="demoGraphJS">
+                    <div class = "btn-group">
+                        <a class = "btn btn-info btn-small fastBackwardBtn" rel="tooltip" title="Restart graph" placement = "top"><i class = "icon-refresh"></i></a>
+                        <a class = "btn btn-info btn-small backBtn" rel="tooltip" title="Previous Step" placement = "top"><i class = "icon-step-backward"></i></a>
+                        <a class = "btn btn-info btn-small pauseBtn" rel="tooltip" title="Pause" placement = "top"><i class = "icon-pause"></i></a>
+                        <a class = "btn btn-info btn-small playBtn" rel="tooltip" title="Play/Animate Graph" placement = "top"><i class = "icon-play"></i></a>
+                        <a class = "btn btn-info btn-small forwardBtn" rel="tooltip" title="Step Forward" placement = "top"><i class = "icon-step-forward"></i></a>
+                        <a class = "btn btn-info btn-small fastForwardBtn" rel="tooltip" title="Skip to end graph" placement = "top"><i class = "icon-fast-forward"></i></a>
+                        
+                    </div>
+    
+                </div>
+            </div>
+        </div><!--End of demo row-fluid-->
+        <div class = "row-fluid"> <!--Bottom row-fluid -->
             <div class = "span6">
                 <div class = "bottomDiv1">
                     <h4>Help Section</h4>
@@ -107,8 +111,8 @@ procedure bubbleSort( A : list of sortable items ){
                 </div>
             </div>
         
-        </div>  <!--End of row-fluid -->
-    </div><!--End of row-fluid -->
+        </div>  <!--End of bottom row-fluid -->
+    </div><!--End of main row-fluid -->
 
      
     <!--================================================== -->

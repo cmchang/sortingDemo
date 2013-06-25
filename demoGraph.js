@@ -37,7 +37,7 @@ function setup_Graph(){
    d3.tsv("demoData.tsv", function(error, data) {
 
       var length=data.map(function(d) { return d.index; }).length;
-      console.log(length)
+    //  console.log(length)
 
       x.domain(data.map(function(d) { return d.index; }));
       y.domain([0, d3.max(data, function(d) { return d.height; })]);
@@ -66,27 +66,22 @@ function setup_Graph(){
       svg.selectAll(".bar")
          .data(data)
          .enter().append("rect")
+         .attr("id",function(d){return "ID" + d.index;})
          .attr("class", "bar")
-         .attr("x", function(d) { return x(d.index); })
+         .attr("x", function(d) {return x(d.index); })
          .attr("width", x.rangeBand())
          .attr("y", function(d) { return y(d.height); })
          .attr("height", function(d) { return height - y(d.height); })
       //    .attr("data-index",data.index);
       // console.log(svg.select(".bar").attr("data-index"))
 
-      d3.select("input").on("change", change);
-
       var n = length, ii=0;//current state
       $('.forwardBtn').on("click", sort); 
       //$('.fastForwardBtn.').on("click", change);
-
-      var sortTimeout = setTimeout(function() {
-         d3.select("input").property("checked", true).each(change);
-      }, 2000);
     
 
       function sort(){
-         var x0 = x.domain(bubbleSort[length-n][ii].slice(0).reverse());
+         var x0 = x.domain(bubbleSort[length-n][ii].slice(0));
     
          var transition = svg.transition().duration(75),
             delay = function(d, i) { return i * 20; };
@@ -94,7 +89,7 @@ function setup_Graph(){
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
-    
+         
          transition.select(".x.axis")
             .call(xAxis)
             .selectAll("g")
@@ -114,9 +109,7 @@ function setup_Graph(){
          }
       }
 
-      function change() {
-         clearTimeout(sortTimeout);
-    
+      function change() {    
          // Copy-on-write since tweens are evaluated after a delay.
          var x0 = x.domain(data.sort(this.checked
             ? function(a, b) { return b.height - a.height; } //checked
