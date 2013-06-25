@@ -87,12 +87,13 @@ function setup_Graph(){
       $('.backwardBtn').on("click", backward); 
       $('.playBtn').on("click",play);
       $('.pauseBtn').on("click",pause);
-      $('.fastForwardBtn').on("click",fastForward);
-      //$('.fastForwardBtn.').on("click", change);
+      $('.fastForwardBtn').on("click", fastForward);
 
       function play(){
-          $(".pauseBtn").removeClass("disabled");
-          $(".playBtn").addClass("disabled");         setTimeout(function (){
+         $(".playBtn").addClass("disabled");
+         $(".pauseBtn").removeClass("disabled");
+
+         setTimeout(function (){
             forward();
             if(!isPause&&(n>1||ii<n-2)){
                play();
@@ -111,11 +112,12 @@ function setup_Graph(){
       }
 
       function forward(){
+
          $(".playBtn").removeClass("disabled");
          $(".pauseBtn").removeClass("disabled");
-         //if n==1 and ii==n-2 -> done
+         //if n==2 and ii==n-2 -> done
          if(ii==n-2){
-            if(n>1){
+            if(n>2){
                ii=0;
                n-=1;
             }else{
@@ -190,22 +192,26 @@ function setup_Graph(){
       }
        
       function fastForward(){
-          n = 1;
-          ii= 0;
           
-         var x0 = x.domain(bubbleSort[length-n][ii].slice(0));
+         n=2;
+         ii=n-2;//0
 
+         var x0 = x.domain(bubbleSort[length-n][ii].slice(0));
+    
          var transition = svg.transition().duration(75),
             delay = function(d, i) { return i * 20; };
+         
+         //d3.select("ID"+(parseInt(ii)+1)).attr("fill","red");
 
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
-    
+
          transition.select(".x.axis")
             .call(xAxis)
             .selectAll("g")
             .delay(delay);
+
       }
           
       function change() {    
