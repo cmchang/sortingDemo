@@ -36,6 +36,7 @@ function setup_Graph(){
    d3.tsv("demoData.tsv", function(error, data) {
 
       var length=data.map(function(d) { return d.index; }).length;
+      console.log(length)
 
       x.domain(data.map(function(d) { return d.index; }));
       y.domain([0, d3.max(data, function(d) { return d.height; })]);
@@ -73,7 +74,7 @@ function setup_Graph(){
       // console.log(svg.select(".bar").attr("data-index"))
 
       d3.select("input").on("change", change);
-      var ii=0,jj=0;//current state
+      var n=length,ii=0;//current state
       $('#next').on("click", sort);
 
       var sortTimeout = setTimeout(function() {
@@ -82,7 +83,7 @@ function setup_Graph(){
     
 
       function sort(){
-         var x0 = x.domain(bubbleSort[ii][jj].reverse());
+         var x0 = x.domain(bubbleSort[length-n][ii].slice(0).reverse());
     
          var transition = svg.transition().duration(750),
             delay = function(d, i) { return i * 50; };
@@ -95,15 +96,18 @@ function setup_Graph(){
             .call(xAxis)
             .selectAll("g")
             .delay(delay);
+         
+         console.log(length-n,ii);
 
-         if(jj==length-1){
-           if(ii<length-1){
-             ii+=1;
-             jj=ii+1;
+         //if n==1 and ii==n-2 -> done
+         if(ii==n-2){
+            ii=0;
+            if(n>1){
+               n-=1;
+            }
            }
-         } 
-         else if(jj<length-1){
-            jj+=1;
+         else if(ii<n-2){
+            ii+=1;
          }
       }
 
