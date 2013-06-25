@@ -69,23 +69,63 @@ function setup_Graph(){
          .attr("id",function(d){return "ID" + d.index;})
          .attr("class", "bar")
          .attr("x", function(d) {return x(d.index); })
+
          .attr("width", x.rangeBand())
          .attr("y", function(d) { return y(d.height); })
          .attr("height", function(d) { return height - y(d.height); })
       //    .attr("data-index",data.index);
       // console.log(svg.select(".bar").attr("data-index"))
 
-      var n = length, ii=0;//current state
-      $('.forwardBtn').on("click", sort); 
-      //$('.fastForwardBtn.').on("click", change);
-    
+      var n = length, ii=-1;//current state
+      var isPause=false;//whether stop is on
 
-      function sort(){
+      $('.forwardBtn').on("click", forward); 
+      $('.backwardBtn').on("click", backward); 
+      $('.playBtn').on("click",play);
+      $('.pauseBtn').on("click",pause);
+      //$('.fastForwardBtn.').on("click", change);
+
+      function play(){
+         $(".playBtn").attr("disabled", "disabled");
+         setTimeout(function (){
+            forward();
+            if(!isPause&&(n>1||ii<n-2)){
+               play();
+            }else if(isPause){
+               isPause=false;
+            }
+         }, 500);
+
+      }
+
+      function pause(){
+         $(".pauseBtn").attr("disabled", "disabled");
+         isPause=true;
+         console.log(isPause);
+      }
+
+      function forward(){
+         
+         //if n==1 and ii==n-2 -> done
+         if(ii==n-2){
+            if(n>1){
+               ii=0;
+               n-=1;
+            }else{
+               //end
+            }
+           }
+         else if(ii<n-2){
+            ii+=1;
+         }
+
          var x0 = x.domain(bubbleSort[length-n][ii].slice(0));
     
          var transition = svg.transition().duration(75),
             delay = function(d, i) { return i * 20; };
-    
+         
+         //d3.select("ID"+(parseInt(ii)+1)).attr("fill","red");
+
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
@@ -96,17 +136,41 @@ function setup_Graph(){
             .delay(delay);
          
          console.log(length-n,ii);
+      }
 
-         //if n==1 and ii==n-2 -> done
-         if(ii==n-2){
-            ii=0;
-            if(n>1){
-               n-=1;
+      function backward(){
+
+         //if n==length and ii==0 -> done
+         if(ii==0){
+            if(n<length){
+               ii=n-2;
+               n+=1;
+            }else{
+               //end
             }
            }
-         else if(ii<n-2){
-            ii+=1;
+         else if(ii>0){
+            ii-=1;
          }
+
+         var x0 = x.domain(bubbleSort[length-n][ii].slice(0));
+    
+         var transition = svg.transition().duration(75),
+            delay = function(d, i) { return i * 20; };
+         
+         //d3.select("ID"+(parseInt(ii)+1)).attr("fill","red");
+
+         transition.selectAll(".bar")
+            .delay(delay)
+            .attr("x", function(d) { return x0(d.index); });
+    
+         transition.select(".x.axis")
+            .call(xAxis)
+            .selectAll("g")
+            .delay(delay);
+         
+         console.log(length-n,ii);
+
       }
 
       function change() {    
