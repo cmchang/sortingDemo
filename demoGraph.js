@@ -1,39 +1,43 @@
 $(document).ready(function(){
-    $('.demoGraphJS').each(function(){
-        setup_Graph(this);
-    });
+   $('.demoGraphJS').each(function(){
+         setup_Graph(this);
+      });
 });
 
 function setup_Graph(){
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
         width = 500 - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
+
     
-    var formatInt = d3.format("d"); //d -> integer (https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format)
+   var formatInt = d3.format("d"); //d -> integer (https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format)
     
-    var x = d3.scale.ordinal()
-        .rangeRoundBands([0, width], .1, 1); //([], width of individual bar, width of all bars)
+   var x = d3.scale.ordinal()
+      .rangeRoundBands([0, width], .1, 1); //([], width of individual bar, width of all bars)
     
-    var y = d3.scale.linear()
-        .range([height, 0]);
+   var y = d3.scale.linear()
+      .range([height, 0]);
     
-    var xAxis = d3.svg.axis()
-        .scale(x)
-        .orient("bottom"); //placement of x axis labels
+   var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom"); //placement of x axis labels
     
-    var yAxis = d3.svg.axis()
-        .scale(y)
-        .orient("left") //placement of y axis labels
-        .tickFormat(formatInt);
+   var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left") //placement of y axis labels
+      .tickFormat(formatInt);
     
-    var svg = d3.select(".demoGraphJS").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+   var svg = d3.select(".demoGraphJS").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
       .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
     
-    d3.tsv("demoData.tsv", function(error, data) {
+   d3.tsv("demoData.tsv", function(error, data) {
+
+      var length=data.map(function(d) { return d.index; }).length;
+
       x.domain(data.map(function(d) { return d.index; }));
       y.domain([0, d3.max(data, function(d) { return d.height; })]);
     
@@ -49,57 +53,85 @@ function setup_Graph(){
           .text("index");
     
       svg.append("g")
-          .attr("class", "y axis")
-          .call(yAxis)
-        .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", ".71em")
-          .style("text-anchor", "end")
-          .text("height");
+         .attr("class", "y axis")
+         .call(yAxis)
+         .append("text")
+         .attr("transform", "rotate(-90)")
+         .attr("y", 6)
+         .attr("dy", ".71em")
+         .style("text-anchor", "end")
+         .text("height");
     
       svg.selectAll(".bar")
-          .data(data)
-        .enter().append("rect")
-          .attr("class", "bar")
-          .attr("x", function(d) { return x(d.index); })
-          .attr("width", x.rangeBand())
-          .attr("y", function(d) { return y(d.height); })
-          .attr("height", function(d) { return height - y(d.height); });
-    
+         .data(data)
+         .enter().append("rect")
+         .attr("class", "bar")
+         .attr("x", function(d) { return x(d.index); })
+         .attr("width", x.rangeBand())
+         .attr("y", function(d) { return y(d.height); })
+         .attr("height", function(d) { return height - y(d.height); })
+      //    .attr("data-index",data.index);
+      // console.log(svg.select(".bar").attr("data-index"))
+
       d3.select("input").on("change", change);
-      d3.select(".palyBtn").on("click", change);
+
+      var ii=0,jj=0;//current state
+      $('.forwardBtn').on("click", sort); 
+      $('.fastForwardBtn.').on("click", change);
+      
 
       var sortTimeout = setTimeout(function() {
-        d3.select("input").property("checked", true).each(change);
-        d3.select(".playBtn").on("click", true).each(change);
+         d3.select("input").property("checked", true).each(change);
       }, 2000);
     
-      function change() {
-        clearTimeout(sortTimeout);
+
+      function sort(){
+         var x0 = x.domain(bubbleSort[ii][jj].reverse());
     
-        // Copy-on-write since tweens are evaluated after a delay.
-        var x0 = x.domain(data.sort(this.checked
+         var transition = svg.transition().duration(750),
+            delay = function(d, i) { return i * 50; };
+    
+         transition.selectAll(".bar")
+            .delay(delay)
+            .attr("x", function(d) { return x0(d.index); });
+    
+         transition.select(".x.axis")
+            .call(xAxis)
+            .selectAll("g")
+            .delay(delay);
+
+         if(jj==length-1){
+           if(ii<length-1){
+             ii+=1;
+             jj=ii+1;
+           }
+         } 
+         else if(jj<length-1){
+            jj+=1;
+         }
+      }
+
+      function change() {
+         clearTimeout(sortTimeout);
+    
+         // Copy-on-write since tweens are evaluated after a delay.
+         var x0 = x.domain(data.sort(this.checked
             ? function(a, b) { return b.height - a.height; } //checked
             : function(a, b) { return b.index - a.index; })//unchecked
             .map(function(d) { return d.index; }))
             .copy();
     
-        var transition = svg.transition().duration(750),
+         var transition = svg.transition().duration(750),
             delay = function(d, i) { return i * 50; };
     
-        transition.selectAll(".bar")
+         transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
     
-        transition.select(".x.axis")
+         transition.select(".x.axis")
             .call(xAxis)
-          .selectAll("g")
+            .selectAll("g")
             .delay(delay);
       }
-    });
-   
-
+   });
 }
-
-

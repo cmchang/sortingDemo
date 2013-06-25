@@ -1,6 +1,5 @@
 <html>
   <head>
-    <meta charset="utf-8">
     <title>Sorting Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,8 +12,7 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src = "demoGraph.js"></script>
     <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-
-
+      <script src = "bubbleSort.js"></script>
   </head>
 
   <body>
@@ -75,6 +73,9 @@ procedure bubbleSort( A : list of sortable items ){
         <h3>.demoGraph placeholder</h3>
             <div class ="demoGraphJS">
                 <div class = "btn-group">
+                    <button type="button" class="btn btn-primary btn-small fastBackwardBtn" id = "next">
+                        <i class = "icon-fast-backward"></i> 
+                    </button>
                     <button type="button" class="btn btn-primary btn-small backBtn">
                         <i class = "icon-step-backward"></i>
                     </button>
@@ -82,8 +83,11 @@ procedure bubbleSort( A : list of sortable items ){
                         <i class = "icon-pause"></i></button>
                     <button type="button" class="btn btn-primary btn-small playBtn">
                         <i class = "icon-play"></i></button>
-                    <button type="button" class="btn btn-primary btn-small forwardBtn">
+                    <button type="button" class="btn btn-primary btn-small forwardBtn" id = "next">
                         <i class = "icon-step-forward"></i> 
+                    </button>
+                    <button type="button" class="btn btn-primary btn-small fastForwardBtn" id = "next">
+                        <i class = "icon-fast-forward"></i> 
                     </button>
                 </div>
                 <label><input type="checkbox"> Sort values</label>

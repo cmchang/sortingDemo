@@ -65,6 +65,10 @@ iframe{
 }
 
 label {
+<<<<<<< HEAD
+  position: absolute;
+=======
+>>>>>>> 4c8e0b6272f7953ec7cc8910314220f7b63a3bf4
   top: 10px;
   right: 10px;
 }
