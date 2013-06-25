@@ -43,7 +43,7 @@ function setup_Graph(){
           .call(xAxis)
         .append("text")
           .attr("y", 16)
-          .attr("x", 480)
+          .attr("x", 430)
           .attr("dx", ".71em")
           .style("text-anchor", "end")
           .text("index");
@@ -68,9 +68,11 @@ function setup_Graph(){
           .attr("height", function(d) { return height - y(d.height); });
     
       d3.select("input").on("change", change);
-    
+      d3.select(".palyBtn").on("click", change);
+
       var sortTimeout = setTimeout(function() {
         d3.select("input").property("checked", true).each(change);
+        d3.select(".playBtn").on("click", true).each(change);
       }, 2000);
     
       function change() {

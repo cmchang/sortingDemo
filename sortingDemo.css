@@ -11,15 +11,34 @@ body {
 }
 
 .demoGraph, .demoCode{
-    height: 100%;
+    height: 400px;
 }
 
+/*
 .demoGraph .demoFile{
-    height: 500px;   
+    height: 400px;   
 }
+*/
 
 iframe{
     border:none;
+}
+
+.bottomDiv1, .bottomDiv2{
+    border: solid 1px;
+    border-radius: 5px;
+    border-color: rgb(142, 138, 138);
+    padding-left:15px;
+    background-color:#F5F5F5;
+    
+}
+
+.bottomDiv1{
+    margin-left: 30px;   
+}
+
+.bottomDiv2{
+    margin-right: 25px;   
 }
 
 
