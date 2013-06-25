@@ -35,7 +35,7 @@ function setup_Graph(){
     
    d3.tsv("demoData.tsv", function(error, data) {
 
-      var length=data.map(function(d) { return d.letter; }).length;
+      var length=data.map(function(d) { return d.index; }).length;
 
       x.domain(data.map(function(d) { return d.index; }));
       y.domain([0, d3.max(data, function(d) { return d.height; })]);
@@ -68,9 +68,12 @@ function setup_Graph(){
          .attr("x", function(d) { return x(d.index); })
          .attr("width", x.rangeBand())
          .attr("y", function(d) { return y(d.height); })
-         .attr("height", function(d) { return height - y(d.height); });
-    
+         .attr("height", function(d) { return height - y(d.height); })
+      //    .attr("data-index",data.index);
+      // console.log(svg.select(".bar").attr("data-index"))
+
       d3.select("input").on("change", change);
+      var ii=0,jj=0;//current state
       $('#next').on("click", sort);
 
       var sortTimeout = setTimeout(function() {
@@ -79,33 +82,29 @@ function setup_Graph(){
     
 
       function sort(){
-         console.log(data.map(function(d) { return d.letter; }),length);
-         if(ii==undefined || jj==undefined){
-           var ii=0;//index we are considering at
-           var jj=0;
-         }
-         if(jj==length){
-           if(ii<length){
-             ii+=1;
-             jj=ii+1;
-           }
-         }
-          
-         var x0 = x.domain(data.sort(function(a, b) { return b.frequency - a.frequency; })
-            .map(function(d) { return d.letter; }))
-            .copy();
-         
-         var transition = svg.transition().duration(2000),
-             delay = function(d, i) { return i * 50; };
-         
+         var x0 = x.domain(bubbleSort[ii][jj].reverse());
+    
+         var transition = svg.transition().duration(750),
+            delay = function(d, i) { return i * 50; };
+    
          transition.selectAll(".bar")
             .delay(delay)
-            .attr("x", function(d) { return x0(d.letter); });
-        
+            .attr("x", function(d) { return x0(d.index); });
+    
          transition.select(".x.axis")
             .call(xAxis)
             .selectAll("g")
             .delay(delay);
+
+         if(jj==length-1){
+           if(ii<length-1){
+             ii+=1;
+             jj=ii+1;
+           }
+         } 
+         else if(jj<length-1){
+            jj+=1;
+         }
       }
 
       function change() {
