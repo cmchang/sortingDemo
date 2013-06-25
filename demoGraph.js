@@ -83,29 +83,32 @@ function setup_Graph(){
       $('.backwardBtn').on("click", backward); 
       $('.playBtn').on("click",play);
       $('.pauseBtn').on("click",pause);
+      $('.fastForwardBtn').on("click",fastForward);
       //$('.fastForwardBtn.').on("click", change);
 
       function play(){
-         $(".playBtn").attr("disabled", "disabled");
-         setTimeout(function (){
+          $(".pauseBtn").removeClass("disabled");
+          $(".playBtn").addClass("disabled");         setTimeout(function (){
             forward();
             if(!isPause&&(n>1||ii<n-2)){
                play();
             }else if(isPause){
                isPause=false;
             }
-         }, 500);
+         }, 50);
 
       }
 
       function pause(){
-         $(".pauseBtn").attr("disabled", "disabled");
+         $(".playBtn").removeClass("disabled");
+         $(".pauseBtn").addClass("disabled");
          isPause=true;
          console.log(isPause);
       }
 
       function forward(){
-         
+         $(".playBtn").removeClass("disabled");
+         $(".pauseBtn").removeClass("disabled");
          //if n==1 and ii==n-2 -> done
          if(ii==n-2){
             if(n>1){
@@ -139,12 +142,13 @@ function setup_Graph(){
       }
 
       function backward(){
-
+          $(".playBtn").removeClass("disabled");
+          $(".pauseBtn").removeClass("disabled");
          //if n==length and ii==0 -> done
          if(ii==0){
             if(n<length){
-               ii=n-2;
                n+=1;
+               ii=n-2;
             }else{
                //end
             }
@@ -172,10 +176,29 @@ function setup_Graph(){
          console.log(length-n,ii);
 
       }
+       
+      function fastForward(){
+          n = 1;
+          ii= 0;
+          
+         var x0 = x.domain(bubbleSort[length-n][ii].slice(0));
 
+         var transition = svg.transition().duration(75),
+            delay = function(d, i) { return i * 20; };
+
+         transition.selectAll(".bar")
+            .delay(delay)
+            .attr("x", function(d) { return x0(d.index); });
+    
+         transition.select(".x.axis")
+            .call(xAxis)
+            .selectAll("g")
+            .delay(delay);
+      }
+          
       function change() {    
-         // Copy-on-write since tweens are evaluated after a delay.
-         var x0 = x.domain(data.sort(this.checked
+          
+          var x0 = x.domain(data.sort(this.checked
             ? function(a, b) { return b.height - a.height; } //checked
             : function(a, b) { return b.index - a.index; })//unchecked
             .map(function(d) { return d.index; }))
