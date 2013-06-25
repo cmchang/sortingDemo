@@ -73,10 +73,14 @@ function setup_Graph(){
          .attr("width", x.rangeBand())
          .attr("y", function(d) { return y(d.height); })
          .attr("height", function(d) { return height - y(d.height); })
+      
+      svg.select("#ID1").style("fill","black");
+      svg.select("#ID2").style("fill","black");
       //    .attr("data-index",data.index);
       // console.log(svg.select(".bar").attr("data-index"))
 
-      var n = length, ii=-1;//current state
+      //n: current for-loop (from length to 2), ii: index (from -1 to n-2 for each n)
+      var n = length, ii=-1;
       var isPause=false;//whether stop is on
 
       $('.forwardBtn').on("click", forward); 
@@ -121,14 +125,22 @@ function setup_Graph(){
          else if(ii<n-2){
             ii+=1;
          }
-
-         var x0 = x.domain(bubbleSort[length-n][ii].slice(0));
+        
+         var x0 = x.domain(bubbleSort[length-n][ii].slice(0)); //calculates the width
     
          var transition = svg.transition().duration(75),
             delay = function(d, i) { return i * 20; };
-         
-         //d3.select("ID"+(parseInt(ii)+1)).attr("fill","red");
+        
+         var jj = length-n;
+          ///////Fix coloring!!//////
+         if ((length-n) > 0 &&  ii == 0){
+            svg.select("#ID"+jj).style("fill","#369DBB");
+         }
+         svg.select("#ID"+(ii+1)).style("fill","#369DBB");
+         svg.select("#ID"+(jj+1)).style("fill","black");
+         svg.select("#ID"+(ii+2+jj)).style("fill","black");
 
+          
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
@@ -138,7 +150,7 @@ function setup_Graph(){
             .selectAll("g")
             .delay(delay);
          
-         console.log(length-n,ii);
+         console.log(jj,ii);
       }
 
       function backward(){
@@ -162,8 +174,8 @@ function setup_Graph(){
          var transition = svg.transition().duration(75),
             delay = function(d, i) { return i * 20; };
          
-         //d3.select("ID"+(parseInt(ii)+1)).attr("fill","red");
-
+         //d3.select("#ID"+(parseInt(ii)+1)).attr("fill","red");
+        
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
