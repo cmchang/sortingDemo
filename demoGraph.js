@@ -92,9 +92,15 @@ console.log(bubbleSort[1][0])
       $('.pauseBtn').on("click",pause);
       $('.fastForwardBtn').on("click", fastForward);
       $('.fastBackwardBtn').on("click",fastBackward);
+       
       function play(){
+         $(".forwardBtn").addClass("disabled");
+         $(".backwardBtn").addClass("disabled");         
          $(".playBtn").addClass("disabled");
          $(".pauseBtn").removeClass("disabled");
+         $(".fastForwardBtn").removeClass("disabled");
+         $(".fastBackwardBtn").addClass("disabled");
+         
 
          setTimeout(function (){
             forward();
@@ -103,21 +109,29 @@ console.log(bubbleSort[1][0])
             }else if(isPause){
                isPause=false;
             }
-         }, 50);
-
+         }, 150);
       }
 
       function pause(){
+         $(".forwardBtn").removeClass("disabled");
+         $(".backwardBtn").removeClass("disabled");         
          $(".playBtn").removeClass("disabled");
-         $(".pauseBtn").addClass("disabled");
+         $(".pauseBtn").removeClass("disabled");
+         $(".fastForwardBtn").removeClass("disabled");
+         $(".fastBackwardBtn").removeClass("disabled");
+          
          isPause=true;
          console.log(isPause);
       }
 
       function forward(){
-
+         $(".forwardBtn").removeClass("disabled");
+         $(".backwardBtn").removeClass("disabled");         
          $(".playBtn").removeClass("disabled");
          $(".pauseBtn").removeClass("disabled");
+         $(".fastForwardBtn").removeClass("disabled");
+         $(".fastBackwardBtn").removeClass("disabled");
+         $(".playBtn").removeClass("disabled");
          //if n==2 and ii==n-2 -> done
          if(ii==n-2){
             if(n>2){
@@ -160,8 +174,13 @@ console.log(bubbleSort[1][0])
       }
 
       function backward(){
-          $(".playBtn").removeClass("disabled");
-          $(".pauseBtn").removeClass("disabled");
+         $(".forwardBtn").removeClass("disabled");
+         $(".backwardBtn").removeClass("disabled");         
+         $(".playBtn").removeClass("disabled");
+         $(".pauseBtn").removeClass("disabled");
+         $(".fastForwardBtn").removeClass("disabled");
+         $(".fastBackwardBtn").removeClass("disabled");
+         $(".playBtn").removeClass("disabled");
          //if n==length and ii==-1 -> done
          if(ii<=0){
             if(n<length){
@@ -221,6 +240,12 @@ console.log(bubbleSort[1][0])
       }
        
       function fastForward(){
+         $(".forwardBtn").addClass("disabled");
+         $(".backwardBtn").removeClass("disabled");         
+         $(".playBtn").addClass("disabled");
+         $(".pauseBtn").addClass("disabled");
+         $(".fastForwardBtn").addClass("disabled");
+         $(".fastBackwardBtn").removeClass("disabled");
           
          n=2;
          ii=n-2;//0
@@ -253,6 +278,13 @@ console.log(bubbleSort[1][0])
       }
           
       function fastBackward(){
+         $(".forwardBtn").removeClass("disabled");
+         $(".backwardBtn").addClass("disabled");         
+         $(".playBtn").removeClass("disabled");
+         $(".pauseBtn").addClass("disabled");
+         $(".fastForwardBtn").removeClass("disabled");
+         $(".fastBackwardBtn").addClass("disabled");
+         $(".playBtn").removeClass("disabled");
          n=length;
          ii=-1;
 
