@@ -50,18 +50,25 @@
       
     <div class="container">
         <h1>Sorting Demos</h1>
-        <p>Filler text. </p>
     </div> <!-- /container -->
     <div class = "row-fluid" id = "bubbleSort"><!--Main row-fluid -->
         <div class = "row-fluid" id = "description"> <!-- Description row-fluid -->
             <div class = "container">
                 <h2 class = "text-info">Bubble Sort</h2>
+                <p> Bubble sort is a simple sorting algorithm that works by repeatedly stepping through the list to be sorted, comparing each pair of adjacent items and swapping them if they are in the wrong order. The algorithm gets its name from the way smaller elements "bubble" to the top of the list. Because it only uses comparisons to operate on elements, it is a comparison sort. Although the algorithm is simple, most of the other sorting algorithms are more efficient for large lists. (Source: Wikipedia)</p>
+                <div class="alert alert-success">  
+                    <a class="close" data-dismiss="alert">x</a>  
+                    <strong>Need help?</strong>
+                    <p>The <b>code</b> below is an is one way of implementing a bubble sort.  Read through it and try to fully understand each line!  You can hover over each line for further explanation.  The tricky part is understanding the constraints in the for loops! Use the <b>graph</b> to watch how bubble sorts work - comparing two elements at a time.</p>
+                    <p>Note: In the graph, bList[j] is black and bList[j+1] is grey!</p>
+                                    
+                </div>  
             </div>
         </div> <!-- End of description row-fluid -->
         <div class = "row-fluid"><!--Demo row-fluid-->
             <div class = "span6 demoCode">
                 <h3>Psuedocode</h3>
-            
+                <h5>Hover over lines of code for further explanation!</h5>
                <div class = "quineHolder"> <!--style = "background-color: #96dbf2"-->
                     <pre class="prettyprint linenums"> <!-- Adds color and line numbers to quine-->
 <span class = "line2" style = "background-color: #96dbf2" rel="tooltip" title="Our array has varying heights with corresponding indices" data-placement = "right"> bList = array of sortable items </span>
@@ -70,7 +77,7 @@
 <span class = "line5"  rel="tooltip" title="The loop within a loop makes sure we can compare all the correct indices" data-placement = "right">    for(int i = 1; i <= bList.length; i++){</span>
 <span class = "line6"  rel="tooltip" title="The loop within a loop makes sure we can compare all the correct indices" data-placement = "right">        for(int j = 1; j <= bList.length-i; j++){</span>
 <span class = "line7" rel="tooltip" title="Compares two neighboring values.  If the smaller index is larger, do the next statement" data-placement = "right">            if (bList[j] > bList[j+1])</span>
-<span class = "line8" rel="tooltip" title="swap the values of the two corresponding indices" data-placement = "right">                swapValueOf(bList[j], bList[j+1])</span>
+<span class = "line8" rel="tooltip" title="Swap the values of the two corresponding indices" data-placement = "right">                swapValueOf(bList[j], bList[j+1])</span>
 <span class = "line9">        }</span>
 <span class = "line10">    }</span>
 <span class = "line11" rel="tooltip" title="Return the finished list!" data-placement = "right">    return bList</span>
