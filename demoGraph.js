@@ -141,10 +141,8 @@ console.log(bubbleSort[1][0])
     
          var transition = svg.transition().duration(75),
             delay = function(d, i) { return i * 20; };
-        
-         var jj = length-n;
-         
-
+                 
+         //coloring graph
          svg.select("#ID"+old1).style("fill","#369DBB");
          svg.select("#ID"+old2).style("fill","#369DBB");
          svg.select("#ID"+indicesOrder[ii]).style("fill","#888888");
@@ -152,6 +150,11 @@ console.log(bubbleSort[1][0])
          old1=indicesOrder[ii];
          old2=indicesOrder[ii+1];
           
+         //highlighting lnes of code
+         //display: i=length-n+1 , j=ii+1
+         $('.line13').text("//current value of i = "+(length-n+1));
+         $('.line14').text("//current value of j = "+(ii+1));
+
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
