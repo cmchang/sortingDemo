@@ -64,16 +64,16 @@
             
                <div class = "quineHolder"> <!--style = "background-color: #96dbf2"-->
                     <pre class="prettyprint linenums"> <!-- Adds color and line numbers to quine-->
-<span class = "line2" style = "background-color: #96dbf2"> bList = array of sortable items </span>
+<span class = "line2" style = "background-color: #96dbf2" rel="tooltip" title="Our array has varying heights with corresponding indices" data-placement = "right"> bList = array of sortable items </span>
 
-<span class = "line4">function bubbleSort(bList){</span>
-<span class = "line5">    for(int i = 1; i <= bList.length; i++){</span>
-<span class = "line6">        for(int j = 1; j <= bList.length-i; j++){</span>
-<span class = "line7">            if (bList[j] > bList[j+1])</span>
-<span class = "line8">                swapValueOf(bList[j], bList[j+1])</span>
+<span class = "line4"  rel="tooltip" title="This initializes the bubble sort function" data-placement = "right">function bubbleSort(bList){</span>
+<span class = "line5"  rel="tooltip" title="The loop within a loop makes sure we can compare all the correct indices" data-placement = "right">    for(int i = 1; i <= bList.length; i++){</span>
+<span class = "line6"  rel="tooltip" title="The loop within a loop makes sure we can compare all the correct indices" data-placement = "right">        for(int j = 1; j <= bList.length-i; j++){</span>
+<span class = "line7" rel="tooltip" title="Compares two neighboring values.  If the smaller index is larger, do the next statement" data-placement = "right">            if (bList[j] > bList[j+1])</span>
+<span class = "line8" rel="tooltip" title="swap the values of the two corresponding indices" data-placement = "right">                swapValueOf(bList[j], bList[j+1])</span>
 <span class = "line9">        }</span>
 <span class = "line10">    }</span>
-<span class = "line11">    return bList</span>
+<span class = "line11" rel="tooltip" title="Return the finished list!" data-placement = "right">    return bList</span>
 <span class = "line12">}</span>
 
                     </pre>    
@@ -83,12 +83,12 @@
             <h3>.demoGraph placeholder</h3>
                 <div class ="demoGraphJS">
                     <div class = "btn-group">
-                        <a class = "btn btn-info btn-small fastBackwardBtn" rel="tooltip" title="Restart graph" placement = "top"><i class = "icon-refresh"></i></a>
-                        <a class = "btn btn-info btn-small backwardBtn" rel="tooltip" title="Previous Step" placement = "top"><i class = "icon-step-backward"></i></a>
-                        <a class = "btn btn-info btn-small pauseBtn" rel="tooltip" title="Pause" placement = "top"><i class = "icon-pause"></i></a>
-                        <a class = "btn btn-info btn-small playBtn" rel="tooltip" title="Play/Animate Graph" placement = "top"><i class = "icon-play"></i></a>
-                        <a class = "btn btn-info btn-small forwardBtn" rel="tooltip" title="Step Forward" placement = "top"><i class = "icon-step-forward"></i></a>
-                        <a class = "btn btn-info btn-small fastForwardBtn" rel="tooltip" title="Skip to end graph" placement = "top"><i class = "icon-fast-forward"></i></a>
+                        <a class = "btn btn-info btn-small fastBackwardBtn" rel="tooltip" title="Restart graph"><i class = "icon-refresh"></i></a>
+                        <a class = "btn btn-info btn-small backwardBtn" rel="tooltip" title="Previous Step"><i class = "icon-step-backward"></i></a>
+                        <a class = "btn btn-info btn-small pauseBtn" rel="tooltip" title="Pause"><i class = "icon-pause"></i></a>
+                        <a class = "btn btn-info btn-small playBtn" rel="tooltip" title="Play/Animate Graph"><i class = "icon-play"></i></a>
+                        <a class = "btn btn-info btn-small forwardBtn" rel="tooltip" title="Step Forward"><i class = "icon-step-forward"></i></a>
+                        <a class = "btn btn-info btn-small fastForwardBtn" rel="tooltip" title="Skip to end graph"><i class = "icon-fast-forward"></i></a>
                         
                     </div>
                 </div>
