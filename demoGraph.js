@@ -93,6 +93,7 @@ console.log(bubbleSort[1][0])
       $('.pauseBtn').on("click",pause);
       $('.fastForwardBtn').on("click", fastForward);
       $('.fastBackwardBtn').on("click",fastBackward);
+       
       function play(){
          $(".playBtn").addClass("disabled");
          $(".pauseBtn").removeClass("disabled");
@@ -106,8 +107,7 @@ console.log(bubbleSort[1][0])
             }else if(isPause){
                isPause=false;
             }
-         }, 50);
-
+         }, 150);
       }
 
       function pause(){
@@ -122,6 +122,7 @@ console.log(bubbleSort[1][0])
          isPlaying=false;
          $(".playBtn").removeClass("disabled");
          $(".pauseBtn").removeClass("disabled");
+
          //if n==2 and ii==n-2 -> done
          if(ii==n-2){
             if(n>2){
