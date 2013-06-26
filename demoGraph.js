@@ -86,7 +86,7 @@ function setup_Graph(){
          startIndices.push(i+1);
       }
 console.log(bubbleSort[1][0])
-      $('.forwardBtn').on("click", forward); 
+      $('.forwardBtn').on("click", function stopPlayAndDoFoward(){forward();isPause=true;}); 
       $('.backwardBtn').on("click", backward); 
       $('.playBtn').on("click",play);
       $('.pauseBtn').on("click",pause);
@@ -108,14 +108,15 @@ console.log(bubbleSort[1][0])
       }
 
       function pause(){
-         $(".playBtn").removeClass("disabled");
-         $(".pauseBtn").addClass("disabled");
-         isPause=true;
-         console.log(isPause);
+         if(isPause){
+            $(".playBtn").removeClass("disabled");
+            $(".pauseBtn").addClass("disabled");
+            isPause=true;
+         }
       }
 
       function forward(){
-
+         
          $(".playBtn").removeClass("disabled");
          $(".pauseBtn").removeClass("disabled");
          //if n==2 and ii==n-2 -> done
@@ -160,6 +161,7 @@ console.log(bubbleSort[1][0])
       }
 
       function backward(){
+         isPause=true;
           $(".playBtn").removeClass("disabled");
           $(".pauseBtn").removeClass("disabled");
          //if n==length and ii==-1 -> done
@@ -221,7 +223,7 @@ console.log(bubbleSort[1][0])
       }
        
       function fastForward(){
-          
+         isPause=true;
          n=2;
          ii=n-2;//0
 
@@ -253,6 +255,7 @@ console.log(bubbleSort[1][0])
       }
           
       function fastBackward(){
+         isPause=true;
          n=length;
          ii=-1;
 
@@ -272,27 +275,6 @@ console.log(bubbleSort[1][0])
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
 
-         transition.select(".x.axis")
-            .call(xAxis)
-            .selectAll("g")
-            .delay(delay);
-      }
-
-      function change() {    
-          
-          var x0 = x.domain(data.sort(this.checked
-            ? function(a, b) { return b.height - a.height; } //checked
-            : function(a, b) { return b.index - a.index; })//unchecked
-            .map(function(d) { return d.index; }))
-            .copy();
-    
-         var transition = svg.transition().duration(750),
-            delay = function(d, i) { return i * 50; };
-    
-         transition.selectAll(".bar")
-            .delay(delay)
-            .attr("x", function(d) { return x0(d.index); });
-    
          transition.select(".x.axis")
             .call(xAxis)
             .selectAll("g")
