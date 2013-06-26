@@ -86,7 +86,7 @@ function setup_Graph(){
          startIndices.push(i+1);
       }
 console.log(bubbleSort[1][0])
-      $('.forwardBtn').on("click", forward); 
+      $('.forwardBtn').on("click", function stopPlayAndDoFoward(){forward();isPause=true;}); 
       $('.backwardBtn').on("click", backward); 
       $('.playBtn').on("click",play);
       $('.pauseBtn').on("click",pause);
@@ -94,13 +94,6 @@ console.log(bubbleSort[1][0])
       $('.fastBackwardBtn').on("click",fastBackward);
        
       function play(){
-         $(".forwardBtn").addClass("disabled");
-         $(".backwardBtn").addClass("disabled");         
-         $(".playBtn").addClass("disabled");
-         $(".pauseBtn").removeClass("disabled");
-         $(".fastForwardBtn").removeClass("disabled");
-         $(".fastBackwardBtn").addClass("disabled");
-         
 
          setTimeout(function (){
             forward();
@@ -113,25 +106,15 @@ console.log(bubbleSort[1][0])
       }
 
       function pause(){
-         $(".forwardBtn").removeClass("disabled");
-         $(".backwardBtn").removeClass("disabled");         
-         $(".playBtn").removeClass("disabled");
-         $(".pauseBtn").removeClass("disabled");
-         $(".fastForwardBtn").removeClass("disabled");
-         $(".fastBackwardBtn").removeClass("disabled");
-          
-         isPause=true;
-         console.log(isPause);
+         if(isPause){
+            $(".playBtn").removeClass("disabled");
+            $(".pauseBtn").addClass("disabled");
+            isPause=true;
+         }
       }
 
       function forward(){
-         $(".forwardBtn").removeClass("disabled");
-         $(".backwardBtn").removeClass("disabled");         
-         $(".playBtn").removeClass("disabled");
-         $(".pauseBtn").removeClass("disabled");
-         $(".fastForwardBtn").removeClass("disabled");
-         $(".fastBackwardBtn").removeClass("disabled");
-         $(".playBtn").removeClass("disabled");
+
          //if n==2 and ii==n-2 -> done
          if(ii==n-2){
             if(n>2){
@@ -174,13 +157,9 @@ console.log(bubbleSort[1][0])
       }
 
       function backward(){
-         $(".forwardBtn").removeClass("disabled");
-         $(".backwardBtn").removeClass("disabled");         
-         $(".playBtn").removeClass("disabled");
-         $(".pauseBtn").removeClass("disabled");
-         $(".fastForwardBtn").removeClass("disabled");
-         $(".fastBackwardBtn").removeClass("disabled");
-         $(".playBtn").removeClass("disabled");
+         isPause=true;
+          $(".playBtn").removeClass("disabled");
+          $(".pauseBtn").removeClass("disabled");
          //if n==length and ii==-1 -> done
          if(ii<=0){
             if(n<length){
@@ -240,13 +219,7 @@ console.log(bubbleSort[1][0])
       }
        
       function fastForward(){
-         $(".forwardBtn").addClass("disabled");
-         $(".backwardBtn").removeClass("disabled");         
-         $(".playBtn").addClass("disabled");
-         $(".pauseBtn").addClass("disabled");
-         $(".fastForwardBtn").addClass("disabled");
-         $(".fastBackwardBtn").removeClass("disabled");
-          
+         isPause=true;
          n=2;
          ii=n-2;//0
 
@@ -278,13 +251,7 @@ console.log(bubbleSort[1][0])
       }
           
       function fastBackward(){
-         $(".forwardBtn").removeClass("disabled");
-         $(".backwardBtn").addClass("disabled");         
-         $(".playBtn").removeClass("disabled");
-         $(".pauseBtn").addClass("disabled");
-         $(".fastForwardBtn").removeClass("disabled");
-         $(".fastBackwardBtn").addClass("disabled");
-         $(".playBtn").removeClass("disabled");
+         isPause=true;
          n=length;
          ii=-1;
 
@@ -304,27 +271,6 @@ console.log(bubbleSort[1][0])
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
 
-         transition.select(".x.axis")
-            .call(xAxis)
-            .selectAll("g")
-            .delay(delay);
-      }
-
-      function change() {    
-          
-          var x0 = x.domain(data.sort(this.checked
-            ? function(a, b) { return b.height - a.height; } //checked
-            : function(a, b) { return b.index - a.index; })//unchecked
-            .map(function(d) { return d.index; }))
-            .copy();
-    
-         var transition = svg.transition().duration(750),
-            delay = function(d, i) { return i * 50; };
-    
-         transition.selectAll(".bar")
-            .delay(delay)
-            .attr("x", function(d) { return x0(d.index); });
-    
          transition.select(".x.axis")
             .call(xAxis)
             .selectAll("g")
