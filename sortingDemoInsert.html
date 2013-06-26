@@ -1,0 +1,139 @@
+<html>
+  <head>
+    <title>Sorting Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS files -->
+    <link href="my-bootstrap/docs/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="sortingDemo.css" rel="stylesheet">
+    <link href="my-bootstrap/docs/assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src = "demoGraph.js"></script>
+
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+    <script src = "bubbleSort.js"></script>
+      
+    <script type="text/javascript"> //activates tooptip
+        $(function () {
+            $("[rel='tooltip']").tooltip();
+            $('[rel=tooltip]').tooltip({container: 'body'});
+        });
+    </script>
+  </head>
+
+  <body>
+
+    <!-- Nav bar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Sorting Demo</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="sortingDemo.html">Home</a></li>
+              <li><a href="sortingDemoBubble.html">Bubble</a></li>
+              <li><a href="#insertSort">Insert</a></li>
+              <li><a href="#">Compare</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+      
+      <!-- End of Nav bar -->
+    
+      
+    <div class="container">
+        <h1>Sorting Demos</h1>
+    </div> <!-- /container -->
+    <div class = "row-fluid" id = "insertSort"><!--Main row-fluid -->
+        <div class = "row-fluid" id = "description"> <!-- Description row-fluid -->
+            <div class = "container">
+                <h2 class = "text-info">Insert Sort</h2>
+                <p> Insort sort is a...etc (Source: Wikipedia)</p>
+                <div class="alert alert-success">  
+                    <a class="close" data-dismiss="alert"><i class = "icon-remove"></i></a>  
+                    <strong>Need help?</strong>
+                    <p>The <b>code</b> below is an is one way of implementing an insort sort.  Read through it and try to fully understand each line!  You can hover over each line for further explanation. Use the <b>graph</b> to watch how bubble sorts work - comparing two elements at a time.</p>
+                                    
+                </div>  
+            </div>
+        </div> <!-- End of description row-fluid -->
+        <div class = "row-fluid"><!--Demo row-fluid-->
+            <div class = "span6 demoCode">
+                <h3>Psuedocode</h3>
+                <h5>Hover over lines of code for further explanation!</h5>
+               <div class = "quineHolder"> <!--style = "background-color: #96dbf2"-->
+                    <pre class="prettyprint linenums"> </pre><!-- Adds color and line numbers to quine-->
+
+                </div> <!-- quineHolder-->
+            </div>
+            <div class = "span6 demoGraph">
+            <h3>Graph Visualization</h3>
+                <div class ="demoGraphJS">
+                    <div class = "btn-group">
+                        <a class = "btn btn-info btn-small fastBackwardBtn" rel="tooltip" title="Restart graph"><i class = "icon-refresh"></i></a>
+                        <a class = "btn btn-info btn-small backwardBtn" rel="tooltip" title="Previous Step"><i class = "icon-step-backward"></i></a>
+                        <a class = "btn btn-info btn-small pauseBtn" rel="tooltip" title="Pause"><i class = "icon-pause"></i></a>
+                        <a class = "btn btn-info btn-small playBtn" rel="tooltip" title="Play/Animate Graph"><i class = "icon-play"></i></a>
+                        <a class = "btn btn-info btn-small forwardBtn" rel="tooltip" title="Step Forward"><i class = "icon-step-forward"></i></a>
+                        <a class = "btn btn-info btn-small fastForwardBtn" rel="tooltip" title="Skip to end graph"><i class = "icon-fast-forward"></i></a>
+                    </div>
+                    <div class = "btn-group pull-right">
+                        <a class = "btn btn-info btn-small randomBtn" rel="tooltip" title="Random Order"><i class = "icon-random"></i></a>
+                        <a class = "btn btn-info btn-small descendBtn" rel="tooltip" title="Descending Order"><i class = "icon-arrow-down"></i></a>
+                        <a class = "btn btn-info btn-small ascendBtn" rel="tooltip" title="Ascending Order"><i class = "icon-arrow-up"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div><!--End of demo row-fluid-->
+        <div class = "row-fluid"> <!--Bottom row-fluid -->
+            <div class = "span6">
+                <div class = "bottomDiv1">
+                    <form>
+                        <fieldset>
+                            <legend>Test your understanding!</legend>
+                            
+                            
+                            
+                        </fieldset>
+                    </form>
+                    
+                    
+                </div>
+            </div>
+            <div class = "span6">
+                <div class = "bottomDiv2">
+                    <h4>List Text</h4>
+                </div>
+            </div>
+        
+        </div>  <!--End of bottom row-fluid -->
+    </div><!--End of main row-fluid -->
+
+     
+    <!--================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="my-bootstrap/docs/assets/js/jquery.js"></script>
+    <script src="my-bootstrap/docs/assets/js/bootstrap-transition.js"></script>
+    <script src="my-bootstrap/docs/assets/js/bootstrap-alert.js"></script>
+    <script src="my-bootstrap/docs/assets/js/bootstrap-modal.js"></script>
+    <script src="my-bootstrap/docs/assets/js/bootstrap-dropdown.js"></script>
+    <script src="my-bootstrap/docs/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="my-bootstrap/docs/assets/js/bootstrap-tab.js"></script>
+    <script src="my-bootstrap/docs/assets/js/bootstrap-tooltip.js"></script>
+    <script src="my-bootstrap/docs/assets/js/bootstrap-popover.js"></script>
+    <script src="my-bootstrap/docs/assets/js/bootstrap-button.js"></script>
+    <script src="my-bootstrap/docs/assets/js/bootstrap-collapse.js"></script>
+    <script src="my-bootstrap/docs/assets/js/bootstrap-carousel.js"></script>
+    <script src="my-bootstrap/docs/assets/js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>

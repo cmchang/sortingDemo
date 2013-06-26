@@ -11,6 +11,7 @@
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src = "demoGraph.js"></script>
+
     <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
     <script src = "bubbleSort.js"></script>
       
@@ -37,8 +38,9 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="#bubbleSort">Bubble</a></li>
+              <li><a href="sortingDemoBubble.html">Bubble</a></li>
               <li><a href="#insertSort">Insert</a></li>
+              <li><a href="#insertSort">Compare</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -50,73 +52,8 @@
       
     <div class="container">
         <h1>Sorting Demos</h1>
+        <p> Select a sort above in the navigation bar to begin!</p>
     </div> <!-- /container -->
-    <div class = "row-fluid" id = "bubbleSort"><!--Main row-fluid -->
-        <div class = "row-fluid" id = "description"> <!-- Description row-fluid -->
-            <div class = "container">
-                <h2 class = "text-info">Bubble Sort</h2>
-                <p> Bubble sort is a simple sorting algorithm that works by repeatedly stepping through the list to be sorted, comparing each pair of adjacent items and swapping them if they are in the wrong order. The algorithm gets its name from the way smaller elements "bubble" to the top of the list. Because it only uses comparisons to operate on elements, it is a comparison sort. Although the algorithm is simple, most of the other sorting algorithms are more efficient for large lists. (Source: Wikipedia)</p>
-                <div class="alert alert-success">  
-                    <a class="close" data-dismiss="alert">x</a>  
-                    <strong>Need help?</strong>
-                    <p>The <b>code</b> below is an is one way of implementing a bubble sort.  Read through it and try to fully understand each line!  You can hover over each line for further explanation.  The tricky part is understanding the constraints in the for loops! Use the <b>graph</b> to watch how bubble sorts work - comparing two elements at a time.</p>
-                    <p>Note: In the graph, bList[j] is black and bList[j+1] is grey!</p>
-                                    
-                </div>  
-            </div>
-        </div> <!-- End of description row-fluid -->
-        <div class = "row-fluid"><!--Demo row-fluid-->
-            <div class = "span6 demoCode">
-                <h3>Psuedocode</h3>
-                <h5>Hover over lines of code for further explanation!</h5>
-               <div class = "quineHolder"> <!--style = "background-color: #96dbf2"-->
-                    <pre class="prettyprint linenums"> <!-- Adds color and line numbers to quine-->
-<span class = "line2" style = "background-color: #96dbf2" rel="tooltip" title="Our array has varying heights with corresponding indices" data-placement = "right"> bList = array of sortable items </span>
-
-<span class = "line4"  rel="tooltip" title="This initializes the bubble sort function" data-placement = "right">function bubbleSort(bList){</span>
-<span class = "line5"  rel="tooltip" title="The loop within a loop makes sure we can compare all the correct indices" data-placement = "right">    for(int i = 1; i <= bList.length; i++){</span>
-<span class = "line6"  rel="tooltip" title="The loop within a loop makes sure we can compare all the correct indices" data-placement = "right">        for(int j = 1; j <= bList.length-i; j++){</span>
-<span class = "line7" rel="tooltip" title="Compares two neighboring values.  If the smaller index is larger, do the next statement" data-placement = "right">            if (bList[j] > bList[j+1])</span>
-<span class = "line8" rel="tooltip" title="Swap the values of the two corresponding indices" data-placement = "right">                swapValueOf(bList[j], bList[j+1])</span>
-<span class = "line9">        }</span>
-<span class = "line10">    }</span>
-<span class = "line11" rel="tooltip" title="Return the finished list!" data-placement = "right">    return bList</span>
-<span class = "line12">}</span>
-<span class = "line13"></span>
-<span class = "line14"></span>
-                    </pre>    
-                </div> <!-- quineHolder-->
-            </div>
-            <div class = "span6 demoGraph">
-            <h3>.demoGraph placeholder</h3>
-                <div class ="demoGraphJS">
-                    <div class = "btn-group">
-                        <a class = "btn btn-info btn-small fastBackwardBtn" rel="tooltip" title="Restart graph"><i class = "icon-refresh"></i></a>
-                        <a class = "btn btn-info btn-small backwardBtn" rel="tooltip" title="Previous Step"><i class = "icon-step-backward"></i></a>
-                        <a class = "btn btn-info btn-small pauseBtn" rel="tooltip" title="Pause"><i class = "icon-pause"></i></a>
-                        <a class = "btn btn-info btn-small playBtn" rel="tooltip" title="Play/Animate Graph"><i class = "icon-play"></i></a>
-                        <a class = "btn btn-info btn-small forwardBtn" rel="tooltip" title="Step Forward"><i class = "icon-step-forward"></i></a>
-                        <a class = "btn btn-info btn-small fastForwardBtn" rel="tooltip" title="Skip to end graph"><i class = "icon-fast-forward"></i></a>
-                        
-                    </div>
-                </div>
-            </div>
-        </div><!--End of demo row-fluid-->
-        <div class = "row-fluid"> <!--Bottom row-fluid -->
-            <div class = "span6">
-                <div class = "bottomDiv1">
-                    <h4>Help Section</h4>
-
-                </div>
-            </div>
-            <div class = "span6">
-                <div class = "bottomDiv2">
-                    <h4>List Text</h4>
-                </div>
-            </div>
-        
-        </div>  <!--End of bottom row-fluid -->
-    </div><!--End of main row-fluid -->
 
      
     <!--================================================== -->

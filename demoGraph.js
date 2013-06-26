@@ -150,10 +150,9 @@ console.log(bubbleSort[1][0])
          old1=indicesOrder[ii];
          old2=indicesOrder[ii+1];
           
-         //highlighting lnes of code
+         //highlighting lines of code
          //display: i=length-n+1 , j=ii+1
-         $('.line13').text("//current value of i = "+(length-n+1));
-         $('.line14').text("//current value of j = "+(ii+1));
+         $('.line7').text("         //current value of i = "+(length-n+1) + ", j =  " + (ii+1) + "          ");
 
          transition.selectAll(".bar")
             .delay(delay)
