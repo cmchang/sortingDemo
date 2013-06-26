@@ -80,6 +80,7 @@ function setup_Graph(){
       //n: current for-loop (from length to 2), ii: index (from -1 to n-2 for each n)
       var n = length, ii=-1;
       var isPause=false;//whether stop is on
+      var isPlaying=false;//whether it is playing
       var old1,old2;//temp values
       var startIndices=[];
       for(var i=0;i<length;i++){
@@ -94,6 +95,10 @@ console.log(bubbleSort[1][0])
       $('.fastBackwardBtn').on("click",fastBackward);
        
       function play(){
+         $(".playBtn").addClass("disabled");
+         $(".pauseBtn").removeClass("disabled");
+         
+         isPlaying=true;
 
          setTimeout(function (){
             forward();
@@ -106,14 +111,17 @@ console.log(bubbleSort[1][0])
       }
 
       function pause(){
-         if(isPause){
+         if(isPlaying){
             $(".playBtn").removeClass("disabled");
             $(".pauseBtn").addClass("disabled");
-            isPause=true;
+            isPause=true;isPlaying=false;
          }
       }
 
       function forward(){
+         isPlaying=false;
+         $(".playBtn").removeClass("disabled");
+         $(".pauseBtn").removeClass("disabled");
 
          //if n==2 and ii==n-2 -> done
          if(ii==n-2){
@@ -157,7 +165,7 @@ console.log(bubbleSort[1][0])
       }
 
       function backward(){
-         isPause=true;
+         isPause=true;isPlaying=false;
           $(".playBtn").removeClass("disabled");
           $(".pauseBtn").removeClass("disabled");
          //if n==length and ii==-1 -> done
@@ -219,7 +227,7 @@ console.log(bubbleSort[1][0])
       }
        
       function fastForward(){
-         isPause=true;
+         isPause=true;isPlaying=false;
          n=2;
          ii=n-2;//0
 
@@ -251,7 +259,7 @@ console.log(bubbleSort[1][0])
       }
           
       function fastBackward(){
-         isPause=true;
+         isPause=true;isPlaying=false;
          n=length;
          ii=-1;
 
