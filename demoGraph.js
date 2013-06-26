@@ -85,7 +85,7 @@ function setup_Graph(){
       for(var i=0;i<length;i++){
          startIndices.push(i+1);
       }
-
+console.log(bubbleSort[1][0])
       $('.forwardBtn').on("click", forward); 
       $('.backwardBtn').on("click", backward); 
       $('.playBtn').on("click",play);
@@ -156,7 +156,7 @@ function setup_Graph(){
             .selectAll("g")
             .delay(delay);
          
-         console.log(jj,ii);
+         console.log(n,ii);
       }
 
       function backward(){
@@ -176,27 +176,36 @@ function setup_Graph(){
             ii-=1;
          }
 
-         //if ii=-1 mean start
-         if(ii>-1){
+         //if ii=n-2 means at the transition from i=0->i=n-2 
+         //if ii=-1 means start
+         if(ii==n-2){
             var indicesOrder=bubbleSort[length-n][ii].slice(0);
-         }
-         else if(ii==-1){
-            var indicesOrder=startIndices.slice(0);
-         }
+            svg.select("#ID"+old1).style("fill","#369DBB");
+            svg.select("#ID"+old2).style("fill","#369DBB");
+            svg.select("#ID"+indicesOrder[0]).style("fill","#888888");
+            svg.select("#ID"+(indicesOrder[1])).style("fill","black");
+            old1=indicesOrder[0];
+            old2=indicesOrder[1];
 
+         }else{
+            if(ii>-1){
+               var indicesOrder=bubbleSort[length-n][ii].slice(0);
+            }
+            else if(ii==-1){
+               var indicesOrder=startIndices.slice(0);
+            }
+
+            svg.select("#ID"+old1).style("fill","#369DBB");
+            svg.select("#ID"+old2).style("fill","#369DBB");
+            svg.select("#ID"+indicesOrder[ii+1]).style("fill","#888888");
+            svg.select("#ID"+(indicesOrder[ii+2])).style("fill","black");
+            old1=indicesOrder[ii+1];
+            old2=indicesOrder[ii+2];
+         }
          var x0 = x.domain(indicesOrder);
     
          var transition = svg.transition().duration(75),
             delay = function(d, i) { return i * 20; };
-         
-         //d3.select("#ID"+(parseInt(ii)+1)).attr("fill","red");
-
-         svg.select("#ID"+old1).style("fill","#369DBB");
-         svg.select("#ID"+old2).style("fill","#369DBB");
-         svg.select("#ID"+indicesOrder[ii+1]).style("fill","#888888");
-         svg.select("#ID"+(indicesOrder[ii+2])).style("fill","black");
-         old1=indicesOrder[ii+1];
-         old2=indicesOrder[ii+2];
 
          transition.selectAll(".bar")
             .delay(delay)
@@ -207,7 +216,7 @@ function setup_Graph(){
             .selectAll("g")
             .delay(delay);
          
-         console.log(length-n,ii);
+         console.log(n,ii);
 
       }
        
