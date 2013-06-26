@@ -60,25 +60,23 @@
         </div> <!-- End of description row-fluid -->
         <div class = "row-fluid"><!--Demo row-fluid-->
             <div class = "span6 demoCode">
-                <h3>.demoCode placeholder</h3>
+                <h3>Psuedocode</h3>
             
-               <div class = "quineHolder">
+               <div class = "quineHolder"> <!--style = "background-color: #96dbf2"-->
                     <pre class="prettyprint linenums"> <!-- Adds color and line numbers to quine-->
-    procedure bubbleSort( A : list of sortable items ){
-           repeat     
-             swapped = false
-             for i = 1 to length(A) - 1 inclusive do:
-               /* if this pair is out of order */
-               if A[i-1] > A[i] then
-                 /* swap them and remember something changed */
-                 swap( A[i-1], A[i] )
-                 swapped = true
-               end if
-             end for
-           until not swapped
-        end procedure
-        }
-                        </pre>    
+<span class = "line2" style = "background-color: #96dbf2"> bList = array of sortable items </span>
+
+<span class = "line4">function bubbleSort(bList){</span>
+<span class = "line5">    for(int i = 1; i <= bList.length; i++){</span>
+<span class = "line6">        for(int j = 1; j <= bList.length-i; j++){</span>
+<span class = "line7">            if (bList[j] > bList[j+1])</span>
+<span class = "line8">                swapValueOf(bList[j], bList[j+1])</span>
+<span class = "line9">        }</span>
+<span class = "line10">    }</span>
+<span class = "line11">    return bList</span>
+<span class = "line12">}</span>
+
+                    </pre>    
                 </div> <!-- quineHolder-->
             </div>
             <div class = "span6 demoGraph">
