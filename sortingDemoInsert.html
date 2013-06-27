@@ -56,12 +56,12 @@
     <div class = "row-fluid" id = "insertSort"><!--Main row-fluid -->
         <div class = "row-fluid" id = "description"> <!-- Description row-fluid -->
             <div class = "container">
-                <h2 class = "text-info">Insert Sort</h2>
-                <p> Insort sort is a...etc (Source: Wikipedia)</p>
+                <h2 class = "text-info">Insertion Sort</h2>
+                <p> Insertion sort iterates, consuming one input element each repetition, and growing a sorted output list. On a repetition, insertion sort removes one element from the input data, finds the location it belongs within the sorted list, and inserts it there. It repeats until no input elements remain. Sorting is typically done in-place, by iterating up the array, growing the sorted list behind it. At each array-position, it checks the value there against the largest value in the sorted list (which happens to be next to it, in the previous array-position checked). If larger, it leaves the element in place and moves to the next. If smaller, it finds the correct position within the sorted list, shifts all the larger values up to make a space, and inserts into that correct position. (Source: Wikipedia)</p>
                 <div class="alert alert-success">  
                     <a class="close" data-dismiss="alert"><i class = "icon-remove"></i></a>  
                     <strong>Need help?</strong>
-                    <p>The <b>code</b> below is an is one way of implementing an insort sort.  Read through it and try to fully understand each line!  You can hover over each line for further explanation. Use the <b>graph</b> to watch how bubble sorts work - comparing two elements at a time.</p>
+                    <p>The <b>code</b> below is an is one way of implementing an insort sort.  Read through it and try to fully understand each line!  You can hover over each line for further explanation. Use the <b>graph</b> to watch how insert sorts work - comparing two elements at a time.</p>
                                     
                 </div>  
             </div>
@@ -71,7 +71,21 @@
                 <h3>Psuedocode</h3>
                 <h5>Hover over lines of code for further explanation!</h5>
                <div class = "quineHolder"> <!--style = "background-color: #96dbf2"-->
-                    <pre class="prettyprint linenums"> </pre><!-- Adds color and line numbers to quine-->
+                    <pre class="prettyprint linenums">
+<span class = "line1"rel="tooltip" title="Our array has varying heights with corresponding indices" data-placement = "right"> iList = array of sortable items </span>
+
+<span class = "line3"  rel="tooltip" title = "This initializes the bubble sort function" data-placement = "right">function insertSort(iList){</span>
+<span class = "line3"  rel="tooltip" title = "For loop filler" data-placement = "right">    for(int n = 1; n < iList.length; n++){</span>
+<span class = "line4"  rel="tooltip" title = "Save the next element to be inserted" data-placement = "right">        int listTemp = ilist[n];</span>      
+<span class = "line5"  rel="tooltip" title = "Create a variable that is equal to n (this is needed because i will be changed below)" data-placement = "right">        int i = n;</span>
+<span  class = "line6" rel="tooltip" title = "Going backward from list[n-1], shift larger elements to the right until you find an element list[i] <= listTemp" data-placement = "top"><span  rel="tooltip" title = "Do this loop if the index is >0 and if the listTemp is smaller than the element on the left</spa>" data-placement = "right">        while (i > 0 && listTemp < list[i-1]){ </span></span>
+<span  class = "line7" rel="tooltip" title = "Shift the larger element to the right" data-placement = "right">            list[i] = list[i-1];</span>
+<span  class = "line8" rel="tooltip" title = "Check the next index on the left" data-placement = "right">            i--;</span>
+        }
+<span  class = "line10" rel="tooltip" title = "Insert the saved element in correct order" data-placement = "right">        list[i] = listTemp;</span>        
+    }
+}
+</pre><!-- Adds color and line numbers to quine-->
 
                 </div> <!-- quineHolder-->
             </div>
