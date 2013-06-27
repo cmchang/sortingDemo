@@ -43,9 +43,9 @@ function setup_Graph(){
       y.domain([0, d3.max(data, function(d) { return d.height; })]);
     
       svg.append("g")
-          .attr("class", "x axis")
-          .attr("transform", "translate(0," + height + ")")
-          .call(xAxis)
+         .attr("transform", "translate(0," + height + ")")
+         .call(xAxis)
+         .attr("class", "x axis")
         .append("text")
           .attr("y", 16)
           .attr("x", 430)
@@ -83,6 +83,7 @@ function setup_Graph(){
       var isPlaying=false;//whether it is playing
       var old1,old2;//temp values
       var startIndices=[];
+
       for(var i=0;i<length;i++){
          startIndices.push(i+1);
       }
@@ -94,6 +95,17 @@ console.log(bubbleSort[1][0])
       $('.fastForwardBtn').on("click", fastForward);
       $('.fastBackwardBtn').on("click",fastBackward);
        
+      $('.descendBtn').on("click",descending);
+      $('.ascendBtn').on("click",ascending);
+      
+      function ascending(){
+         bubbleSort=bubbleSort1.splice(0);
+      }
+      function descending(){
+         console.log("here")
+         bubbleSort=bubbleSort2.splice(0);
+      }
+
       function play(){
          $(".playBtn").addClass("disabled");
          $(".pauseBtn").removeClass("disabled");
@@ -156,12 +168,13 @@ console.log(bubbleSort[1][0])
 
          transition.selectAll(".bar")
             .delay(delay)
-            .attr("x", function(d) { return x0(d.index); });
-         
-         transition.select(".x.axis")
-            .call(xAxis)
-            .selectAll("g")
-            .delay(delay);
+            .attr("x", function(d,i) {return x0(d.index); });
+
+         //don't want to swap indices
+         // transition.select(".x.axis")
+         //    .call(xAxis)
+         //    .selectAll("g")
+         //    .delay(delay);
          
          console.log(n,ii);
       }
@@ -210,6 +223,11 @@ console.log(bubbleSort[1][0])
             old1=indicesOrder[ii+1];
             old2=indicesOrder[ii+2];
          }
+
+         //highlighting lines of code
+         //display: i=length-n+1 , j=ii+1
+         $('.line7').text("         //current value of i = "+(length-n+1) + ", j =  " + (ii+1) + "          ");
+
          var x0 = x.domain(indicesOrder);
     
          var transition = svg.transition().duration(75),
@@ -219,10 +237,11 @@ console.log(bubbleSort[1][0])
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
     
-         transition.select(".x.axis")
-            .call(xAxis)
-            .selectAll("g")
-            .delay(delay);
+         //don't want to swap indices
+         // transition.select(".x.axis")
+         //    .call(xAxis)
+         //    .selectAll("g")
+         //    .delay(delay);
          
          console.log(n,ii);
 
@@ -242,21 +261,24 @@ console.log(bubbleSort[1][0])
          old1=indicesOrder[0];
          old2=(indicesOrder[1]);
 
+         //highlighting lines of code
+         //display: i=length-n+1 , j=ii+1
+         $('.line7').text("         //current value of i = "+(length-n+1) + ", j =  " + (ii+1) + "          ");
+
          var x0 = x.domain(indicesOrder);
     
          var transition = svg.transition().duration(75),
             delay = function(d, i) { return i * 20; };
          
-         //d3.select("ID"+(parseInt(ii)+1)).attr("fill","red");
-
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
 
-         transition.select(".x.axis")
-            .call(xAxis)
-            .selectAll("g")
-            .delay(delay);
+         //don't want to swap indices
+         // transition.select(".x.axis")
+         //    .call(xAxis)
+         //    .selectAll("g")
+         //    .delay(delay);
 
       }
           
@@ -270,21 +292,24 @@ console.log(bubbleSort[1][0])
          svg.select("#ID"+old1).style("fill","#369DBB");
          svg.select("#ID"+old2).style("fill","#369DBB");
 
+         //highlighting lines of code
+         //display: i=length-n+1 , j=ii+1
+         $('.line7').text("         //current value of i = "+(length-n+1) + ", j =  " + (ii+1) + "          ");
+
          var x0 = x.domain(indicesOrder);
     
          var transition = svg.transition().duration(75),
             delay = function(d, i) { return i * 20; };
          
-         //d3.select("ID"+(parseInt(ii)+1)).attr("fill","red");
-
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
 
-         transition.select(".x.axis")
-            .call(xAxis)
-            .selectAll("g")
-            .delay(delay);
+   //don't want to swap indices
+         //transition.select(".x.axis")
+            // .call(xAxis)
+            // .selectAll("g")
+            // .delay(delay);
       }
    });
 }
