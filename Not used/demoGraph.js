@@ -37,6 +37,7 @@ function setup_Graph(){
    d3.tsv("demoData.tsv", function(error, data) {
 
       var length=data.map(function(d) { return d.index; }).length;
+    //  console.log(length)
 
       x.domain(data.map(function(d) { return d.index; }));
       y.domain([0, d3.max(data, function(d) { return d.height; })]);
@@ -73,18 +74,20 @@ function setup_Graph(){
          .attr("y", function(d) { return y(d.height); })
          .attr("height", function(d) { return height - y(d.height); })
       
+      //    .attr("data-index",data.index);
+      // console.log(svg.select(".bar").attr("data-index"))
+
       //n: current for-loop (from length to 2), ii: index (from -1 to n-2 for each n)
       var n = length, ii=-1;
       var isPause=false;//whether stop is on
       var isPlaying=false;//whether it is playing
       var old1,old2;//temp values
       var startIndices=[];
-      var dataArray = data.map(function(d){return d.height});
-       
+
       for(var i=0;i<length;i++){
          startIndices.push(i+1);
       }
-
+console.log(bubbleSort[1][0])
       $('.forwardBtn').on("click", function stopPlayAndDoFoward(){forward();isPause=true;}); 
       $('.backwardBtn').on("click", backward); 
       $('.playBtn').on("click",play);
@@ -96,16 +99,11 @@ function setup_Graph(){
       $('.ascendBtn').on("click",ascending);
       
       function ascending(){
-         fastBackward();
-         $(".ascendBtn").addClass("disabled");
-         $(".descendBtn").removeClass("disabled");
-         bubbleSort=bubbleSort1.slice(0);
+         bubbleSort=bubbleSort1.splice(0);
       }
       function descending(){
-         fastBackward();
-         $(".descendBtn").addClass("disabled");
-         $(".ascendBtn").removeClass("disabled");
-         bubbleSort=bubbleSort2.slice(0);
+         console.log("here")
+         bubbleSort=bubbleSort2.splice(0);
       }
 
       function play(){
@@ -116,7 +114,7 @@ function setup_Graph(){
 
          setTimeout(function (){
             forward();
-            if(!isPause&&(n>2||ii<n-2)){
+            if(!isPause&&(n>1||ii<n-2)){
                play();
             }else if(isPause){
                isPause=false;
@@ -164,15 +162,7 @@ function setup_Graph(){
          old1=indicesOrder[ii];
          old2=indicesOrder[ii+1];
           
-          
-         //change table on html page
-          
-          var temp1 = dataArray[indicesOrder[ii]-1];
-          $(".index" + ii).text(dataArray[indicesOrder[ii+1]-1]);
-          $(".index" + ii+1).text(temp1);
-          console.log(ii+"," + indicesOrder[ii] + "," + dataArray[indicesOrder[ii]-1]+  "         "+ indicesOrder + "        " + dataArray);
-
-          //highlighting lines of code
+         //highlighting lines of code
          //display: i=length-n+1 , j=ii+1
          $('.line7').text("         //current value of i = "+(length-n+1) + ", j =  " + (ii+1) + "          ");
 
@@ -190,13 +180,7 @@ function setup_Graph(){
       }
 
       function backward(){
-
-         isPause=true;
-         setTimeout(function (){
-            isPause=false;
-         }, 50)
-
-         isPlaying=false;
+         isPause=true;isPlaying=false;
           $(".playBtn").removeClass("disabled");
           $(".pauseBtn").removeClass("disabled");
          //if n==length and ii==-1 -> done
@@ -264,12 +248,7 @@ function setup_Graph(){
       }
        
       function fastForward(){
-         isPause=true;
-         setTimeout(function (){
-            isPause=false;
-         }, 50)
-         
-         isPlaying=false;
+         isPause=true;isPlaying=false;
          n=2;
          ii=n-2;//0
 
@@ -304,12 +283,7 @@ function setup_Graph(){
       }
           
       function fastBackward(){
-         isPause=true;
-         setTimeout(function (){
-            isPause=false;
-         }, 50)
-         
-         isPlaying=false;
+         isPause=true;isPlaying=false;
          n=length;
          ii=-1;
 
