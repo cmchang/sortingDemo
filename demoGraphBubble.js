@@ -167,10 +167,12 @@ function setup_Graph(){
           
          //change table on html page
           
-          var temp1 = dataArray[indicesOrder[ii]-1];
-          $(".index" + ii).text(dataArray[indicesOrder[ii+1]-1]);
-          $(".index" + ii+1).text(temp1);
-          console.log(ii+"," + indicesOrder[ii] + "," + dataArray[indicesOrder[ii]-1]+  "         "+ indicesOrder + "        " + dataArray);
+          var temp1 = dataArray[indicesOrder[ii+1]-1];
+          var temp2 = dataArray[indicesOrder[ii]-1]
+          var iiplus1 = ii+1;
+          console.log(ii + ", " + temp1 + ", " + temp2);
+          $(".index" + ii).text(temp2);
+          $(".index" + iiplus1).text(temp1);
 
           //highlighting lines of code
          //display: i=length-n+1 , j=ii+1
@@ -186,7 +188,7 @@ function setup_Graph(){
          //    .selectAll("g")
          //    .delay(delay);
          
-         console.log(n,ii);
+         //console.log(n,ii);
       }
 
       function backward(){
