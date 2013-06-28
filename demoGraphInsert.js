@@ -140,28 +140,31 @@ function setup_Graph(){
 
          //if n==2 and ii==n-2 -> done
          if(ii==insertSort[n].length-1){
+            if(n<length-1){
                n+=1;
                ii=0;
-         }else if(n==length-1){
+            }else{
                //end
-         }
-         else{
+            }
+         }else{
             ii+=1;
          }
         
-         var indicesOrder=insertSort[length-n][ii].slice(0);
+         var indicesOrder=insertSort[n][ii].slice(0);
          var x0 = x.domain(indicesOrder); //calculates the width
     
          var transition = svg.transition().duration(75),
             delay = function(d, i) { return i * 20; };
                  
          //coloring graph
-         svg.select("#ID"+old1).style("fill","#369DBB");
-         svg.select("#ID"+old2).style("fill","#369DBB");
-         svg.select("#ID"+indicesOrder[ii]).style("fill","#888888");
-         svg.select("#ID"+(indicesOrder[ii+1])).style("fill","black");
-         old1=indicesOrder[ii];
-         old2=indicesOrder[ii+1];
+         //svg.select("#ID"+old1).style("fill","#369DBB");
+         svg.select("#ID"+old2).style("fill","black");
+         if(!(ii==insertSort[n].length-1 && n==length-1)){
+            svg.select("#ID"+indicesOrder[n-ii-1]).style("fill","#888888");
+         }
+         svg.select("#ID"+(indicesOrder[n-ii])).style("fill","black");
+         //old1=indicesOrder[n-ii];
+         old2=indicesOrder[n-ii-1];
           
          //highlighting lines of code
          //display: i=length-n+1 , j=ii+1
