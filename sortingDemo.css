@@ -1,5 +1,6 @@
 body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        /* 60px to make the container go all the way to the bottom of the topbar */
+        padding-top: 60px; 
       }
 
 .demoCode{
@@ -41,12 +42,6 @@ iframe{
 
 
 /*demoGraph CSS below*/
-
-/*
-#ID7{
-    fill: black;
-}
-*/
 
 .axis text {
   font: 10px sans-serif;
