@@ -80,7 +80,8 @@ function setup_Graph(){
       var old1,old2;//temp values
       var startIndices=[];
       var dataArray = data.map(function(d){return d.height});
-       
+      var bubbleSort=bubbleSort1.slice(0);
+
       for(var i=0;i<length;i++){
          startIndices.push(i+1);
       }

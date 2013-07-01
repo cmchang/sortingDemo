@@ -81,6 +81,7 @@ function setup_Graph(){
       var isPlaying=false;//whether it is playing
       var old;//temp values
       var startIndices=[];
+      var insertSort=insertSort1.slice(0);
 
       for(var i=0;i<length;i++){
          startIndices.push(i+1);
