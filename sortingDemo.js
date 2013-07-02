@@ -4,7 +4,7 @@
 //For Question 1
 $(".Q1btn").on("click", checkAnswer1);
 function checkAnswer1(){
-    if($(".Q1input").val() == "7"){
+    if($(".Q1input").val() == "8"){
         $(".Q1result").html('<i class = "icon-ok"></i>');
         $(".Q2Area").html('<span class = "Q2">2. Re-type line 7 so that the list will sort in descending order.</span>'+
                           '<br><input class = "Q2input" type = "text" placeholder="Type the new code for line 7" style = "height:35px;">'+
