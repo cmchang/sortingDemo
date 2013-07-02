@@ -171,9 +171,14 @@ function setup_Graph(){
           var temp1 = dataArray[indicesOrder[ii+1]-1];
           var temp2 = dataArray[indicesOrder[ii]-1]
           var iiplus1 = ii+1;
-          console.log(ii + ", " + temp1 + ", " + temp2);
-          $(".index" + ii).text(temp2);
-          $(".index" + iiplus1).text(temp1);
+          //console.log(ii + ", " + temp1 + ", " + temp2);
+          for (var xx = 0; xx < dataArray.length; xx++){
+              $(".index" + xx).css("color", "black");}
+
+          $(".index" + ii).text(temp2).css("color", "#369DBB");
+          $(".index" + iiplus1).text(temp1).css("color", "#1c728e");
+                  
+
 
           //highlighting lines of code
          //display: i=length-n+1 , j=ii+1
@@ -235,6 +240,22 @@ function setup_Graph(){
             old2=indicesOrder[ii+2];
          }
 
+          
+        //change table on html page
+          var iiplus1 = ii+1;
+          var iiplus2 = ii+2;
+          var temp1 = dataArray[indicesOrder[iiplus1]-1];
+          var temp2 = dataArray[indicesOrder[iiplus2]-1]
+        
+          for (var xx = 0; xx < dataArray.length; xx++){
+              $(".index" + xx).css("color", "black");}
+
+          $(".index" + iiplus2).text(temp2).css("color", "#369DBB");
+          $(".index" + iiplus1).text(temp1).css("color", "#1c728e");
+          
+          
+          
+                  
          //highlighting lines of code
          //display: i=length-n+1 , j=ii+1
          $('.line7').text("         //current value of i = "+(length-n+1) + ", j =  " + (ii+1) + "          ");
@@ -280,9 +301,15 @@ function setup_Graph(){
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
+          
+          //changes table
+          for (var xx = 0; xx < dataArray.length; xx++){
+              $(".index" + xx).text(dataArray[indicesOrder[xx]-1]).css("color", "black"); ////change indicesOrder
+          }
+
       }
           
-      function fastBackward(){
+      function fastBackward(){ //refresh icon
          isPause=true;
          setTimeout(function (){
             isPause=false;
@@ -309,6 +336,12 @@ function setup_Graph(){
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
+
+          //changes table
+          for (var xx = 0; xx < dataArray.length; xx++){
+              $(".index" + xx).text(dataArray[xx]).css("color", "black"); ////change indicesOrder
+          }
+          
       }
    });
 }
