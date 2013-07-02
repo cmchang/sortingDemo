@@ -61,7 +61,7 @@ function setup_Graph(){
          .attr("y", 6)
          .attr("dy", ".71em")
          .style("text-anchor", "end")
-         .text("height");
+         .text("value");
     
       svg.selectAll(".bar")
          .data(data)
@@ -82,6 +82,7 @@ function setup_Graph(){
       var old;//temp values
       var startIndices=[];
       var insertSort=insertSort1.slice(0);
+      var oldK=-1;
       var dataArray = data.map(function(d){return d.height});
 
       for(var i=0;i<length;i++){
@@ -155,8 +156,7 @@ function setup_Graph(){
          if(insertSort[n].length>ii){
             var indicesOrder=insertSort[n][ii].slice(0);
 
-            var x0 = x.domain(indicesOrder); //calculates the width
-       
+            var x0 = x.domain(indicesOrder); //calculates the widt
             var transition = svg.transition().duration(75),
                delay = function(d, i) { return i * 20; };
                     
@@ -172,6 +172,17 @@ function setup_Graph(){
             //display: i=length-n+1 , j=ii+1
             $('.line2').text("//current value of n = "+n + ", i =  " + (n-ii) + "          ");
 
+            //change table on html page
+            var k = n-ii;
+            var temp1 = dataArray[indicesOrder[k-1]-1];
+            var temp2 = dataArray[indicesOrder[k]-1];
+
+            $(".index"+oldK).css("color","#1c728e");
+
+            $(".index" + (k-1)).text(temp1).css("color", "#369DBB");
+            $(".index" + k).text(temp2).css("color", "#1c728e");
+            oldK=k-1;
+
             transition.selectAll(".bar")
                .delay(delay)
                      .attr("x", function(d,i) {return x0(d.index); });
@@ -180,6 +191,25 @@ function setup_Graph(){
          }
       }
 
+      function decrement(n,ii){
+         if(ii<=0){
+            if(n>1){
+               n-=1;
+               if(insertSort[n].length==0){
+                  decrement(n,ii);
+               }else{
+                  ii=insertSort[n].length-1;
+               }
+            }else{
+               //end
+               n=0;
+               ii=-1;
+            }
+         }else{
+            ii-=1;
+         }
+         return [n,ii];
+      }
       function backward(){
          isPause=true;
          setTimeout(function (){
@@ -192,36 +222,45 @@ function setup_Graph(){
          //n: current for-loop (from 1 to length-1), ii: means we are in the iith step of the loop (from 0 to insertSort[n].length)
 
          //end n=1, ii=0
-         if(ii<=0){
-            if(n>1){
-               n-=1;
-               ii=insertSort[n].length-1;
-            }else{
-               //end
-               n=0;
-               ii=-1;
-            }
-         }else{
-            ii-=1;
-         }
-
+         a=decrement(n,ii);
+         n=a[0];
+         ii=a[1];
+         
+         oldK=-1;
+         console.log(n,ii);
          if(ii==insertSort[n].length-1&&n>=1){
             var indicesOrder=insertSort[n][ii].slice(0);
             svg.select("#ID"+indicesOrder[n+1]).style("fill","#369DBB");
 
-
+            var temp1 = dataArray[indicesOrder[n]-1];
+            var temp2 = dataArray[indicesOrder[n+1]-1];
+            $(".index" + (n)).text(temp1).css("color", "#1c728e");
+            $(".index" + (n+1)).text(temp2).css("color", "black");
          }else{
             if(n>1){
                var indicesOrder=insertSort[n][ii].slice(0);
+               svg.select("#ID"+old).style("fill","#black");
+               svg.select("#ID"+indicesOrder[n-ii-1]).style("fill","#888888");
+               svg.select("#ID"+(indicesOrder[n-ii])).style("fill","black");
+               old=indicesOrder[n-ii-1];
+
+               //change table on html page
+               var k = n-ii;
+               var temp1 = dataArray[indicesOrder[k-1]-1];
+               var temp2 = dataArray[indicesOrder[k-2]-1];
+
+               $(".index" + (k-1)).text(temp1).css("color", "#369DBB");
+               $(".index" + (k-2)).text(temp2).css("color", "#1c728e");
             }
             else{
                var indicesOrder=startIndices.slice(0);
+               svg.select("#ID"+1).style("fill","#369DBB");
+               svg.select("#ID"+2).style("fill","#369DBB");
+               $(".index" + 0).text(dataArray[0]).css("color", "black");
+               $(".index" + 1).text(dataArray[1]).css("color", "black");
             }
 
-            svg.select("#ID"+old).style("fill","#black");
-            svg.select("#ID"+indicesOrder[n-ii-1]).style("fill","#888888");
-            svg.select("#ID"+(indicesOrder[n-ii])).style("fill","black");
-            old=indicesOrder[n-ii-1];
+
          }
 
          //highlighting lines of code
@@ -252,6 +291,9 @@ function setup_Graph(){
 
          svg.selectAll(".bar").style("fill","black");
 
+         for (var xx = 0; xx < dataArray.length; xx++){
+            $(".index" + xx).text(dataArray[indicesOrder[xx]-1]).css("color", "#1c728e"); ////change indicesOrder
+         }
 
          //highlighting lines of code
          $('.line2').text("//current value of n = "+ n + ", ii =  " + (n-ii) + "          ");
@@ -267,10 +309,12 @@ function setup_Graph(){
       }
           
       function fastBackward(){
+         old=-1;
+         oldK=-1;
          isPause=true;
          setTimeout(function (){
             isPause=false;
-         }, 50)
+         }, 200)
          isPlaying=false;
          n=0;
          ii=-1;
@@ -282,6 +326,10 @@ function setup_Graph(){
          //highlighting lines of code
          //display: i=length-n+1 , j=ii+1
          $('.line2').text("         //current value of n = "+n + ", i =  " + (n-ii) + "          ");
+
+         for (var xx = 0; xx < dataArray.length; xx++){
+            $(".index" + xx).text(dataArray[xx]).css("color", "black"); ////change indicesOrder
+         }
 
          var x0 = x.domain(indicesOrder);
     

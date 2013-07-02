@@ -35,7 +35,7 @@ function setup_Graph(){
    var svg = d3.select(".demoGraphJS").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
-      .append("g")
+      .append("g")  
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
     
@@ -176,7 +176,6 @@ function setup_Graph(){
           var temp1 = dataArray[indicesOrder[ii+1]-1];
           var temp2 = dataArray[indicesOrder[ii]-1]
           var iiplus1 = ii+1;
-          //console.log(ii + ", " + temp1 + ", " + temp2);
           for (var xx = 0; xx < dataArray.length; xx++){
               $(".index" + xx).css("color", "black");}
 
@@ -318,7 +317,7 @@ function setup_Graph(){
          isPause=true;
          setTimeout(function (){
             isPause=false;
-         }, 50)
+         }, 200)
          
          isPlaying=false;
          n=length;
