@@ -196,7 +196,11 @@ function setup_Graph(){
             if(n>1){
                n-=1;
                if(insertSort[n].length==0){
-                  decrement(n,ii);
+                  console.log(n+1)
+                  svg.select("#ID"+(n+2)).style("fill","#369DBB");
+                  a=decrement(n,ii);
+                  n=a[0];
+                  ii=a[1];
                }else{
                   ii=insertSort[n].length-1;
                }
