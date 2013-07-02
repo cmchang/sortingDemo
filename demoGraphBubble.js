@@ -30,7 +30,7 @@ function setup_Graph(){
    var svg = d3.select(".demoGraphJS").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
-      .append("g")
+      .append("g")  
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
     
@@ -60,7 +60,7 @@ function setup_Graph(){
          .attr("y", 6)
          .attr("dy", ".71em")
          .style("text-anchor", "end")
-         .text("height");
+         .text("value");
     
       svg.selectAll(".bar")
          .data(data)
@@ -171,7 +171,6 @@ function setup_Graph(){
           var temp1 = dataArray[indicesOrder[ii+1]-1];
           var temp2 = dataArray[indicesOrder[ii]-1]
           var iiplus1 = ii+1;
-          //console.log(ii + ", " + temp1 + ", " + temp2);
           for (var xx = 0; xx < dataArray.length; xx++){
               $(".index" + xx).css("color", "black");}
 
@@ -313,7 +312,7 @@ function setup_Graph(){
          isPause=true;
          setTimeout(function (){
             isPause=false;
-         }, 50)
+         }, 200)
          
          isPlaying=false;
          n=length;
