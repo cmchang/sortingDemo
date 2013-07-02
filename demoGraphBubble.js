@@ -60,7 +60,7 @@ function setup_Graph(){
          .attr("y", 6)
          .attr("dy", ".71em")
          .style("text-anchor", "end")
-         .text("height");
+         .text("value");
     
       svg.selectAll(".bar")
          .data(data)
