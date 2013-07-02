@@ -80,7 +80,8 @@ function setup_Graph(){
       var old1,old2;//temp values
       var startIndices=[];
       var dataArray = data.map(function(d){return d.height});
-       
+      var bubbleSort=bubbleSort1.slice(0);
+
       for(var i=0;i<length;i++){
          startIndices.push(i+1);
       }
@@ -186,14 +187,6 @@ function setup_Graph(){
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d,i) {return x0(d.index); });
-
-         //don't want to swap indices
-         // transition.select(".x.axis")
-         //    .call(xAxis)
-         //    .selectAll("g")
-         //    .delay(delay);
-         
-         //console.log(n,ii);
       }
 
       function backward(){
@@ -275,15 +268,6 @@ function setup_Graph(){
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
-    
-         //don't want to swap indices
-         // transition.select(".x.axis")
-         //    .call(xAxis)
-         //    .selectAll("g")
-         //    .delay(delay);
-         
-         console.log(n,ii);
-
       }
        
       function fastForward(){
@@ -294,7 +278,7 @@ function setup_Graph(){
          
          isPlaying=false;
          n=2;
-         ii=n-2;//0
+         ii=n-2;
 
          var indicesOrder=bubbleSort[length-n][ii].slice(0)
 
@@ -317,18 +301,12 @@ function setup_Graph(){
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
-
-         //don't want to swap indices
-         // transition.select(".x.axis")
-         //    .call(xAxis)
-         //    .selectAll("g")
-         //    .delay(delay);
-
           
           //changes table
           for (var xx = 0; xx < dataArray.length; xx++){
               $(".index" + xx).text(dataArray[indicesOrder[xx]-1]).css("color", "black"); ////change indicesOrder
           }
+
       }
           
       function fastBackward(){ //refresh icon
@@ -364,11 +342,6 @@ function setup_Graph(){
               $(".index" + xx).text(dataArray[xx]).css("color", "black"); ////change indicesOrder
           }
           
-   //don't want to swap indices
-         //transition.select(".x.axis")
-            // .call(xAxis)
-            // .selectAll("g")
-            // .delay(delay);
       }
    });
 }

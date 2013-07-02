@@ -73,17 +73,15 @@ function setup_Graph(){
          .attr("width", x.rangeBand())
          .attr("y", function(d) { return y(d.height); })
          .attr("height", function(d) { return height - y(d.height); })
-      
-      //    .attr("data-index",data.index);
-      // console.log(svg.select(".bar").attr("data-index"))
+
 
       //n: current for-loop (from 1 to length-1), ii: means we are in the iith step of the loop (from 0 to insertSort[n].length-1)
-
       var n = 0,ii=-1;
       var isPause=false;//whether stop is on
       var isPlaying=false;//whether it is playing
-      var old1,old2;//temp values
+      var old;//temp values
       var startIndices=[];
+      var insertSort=insertSort1.slice(0);
 
       for(var i=0;i<length;i++){
          startIndices.push(i+1);
@@ -162,14 +160,12 @@ function setup_Graph(){
                delay = function(d, i) { return i * 20; };
                     
             //coloring graph
-            //svg.select("#ID"+old1).style("fill","#369DBB");
-            svg.select("#ID"+old2).style("fill","black");
+            svg.select("#ID"+old).style("fill","black");
             if(!(ii==insertSort[n].length-1 && n==length-1)){
                svg.select("#ID"+indicesOrder[n-ii-1]).style("fill","#888888");
             }
             svg.select("#ID"+(indicesOrder[n-ii])).style("fill","black");
-            //old1=indicesOrder[n-ii];
-            old2=indicesOrder[n-ii-1];
+            old=indicesOrder[n-ii-1];
              
             //highlighting lines of code
             //display: i=length-n+1 , j=ii+1
@@ -180,14 +176,7 @@ function setup_Graph(){
                      .attr("x", function(d,i) {return x0(d.index); });
          }else{
             svg.select("#ID"+(ii+1)).style("fill","black");
-            //svg.select("#ID"+(ii+2)).style("fill","#888888");            
          }
-         //don't want to swap indices
-         // transition.select(".x.axis")
-         //    .call(xAxis)
-         //    .selectAll("g")
-         //    .delay(delay);
-         console.log(n,ii);
       }
 
       function backward(){
@@ -217,12 +206,8 @@ function setup_Graph(){
 
          if(ii==insertSort[n].length-1&&n>=1){
             var indicesOrder=insertSort[n][ii].slice(0);
-            //svg.select("#ID"+old1).style("fill","#369DBB");
-            //svg.select("#ID"+old2).style("fill","#369DBB");
             svg.select("#ID"+indicesOrder[n+1]).style("fill","#369DBB");
-            //svg.select("#ID"+(indicesOrder[1])).style("fill","black");
-            //old1=indicesOrder[0];
-            //old2=indicesOrder[1];
+
 
          }else{
             if(n>1){
@@ -232,12 +217,10 @@ function setup_Graph(){
                var indicesOrder=startIndices.slice(0);
             }
 
-            //svg.select("#ID"+old1).style("fill","#369DBB");
-            svg.select("#ID"+old2).style("fill","#black");
+            svg.select("#ID"+old).style("fill","#black");
             svg.select("#ID"+indicesOrder[n-ii-1]).style("fill","#888888");
             svg.select("#ID"+(indicesOrder[n-ii])).style("fill","black");
-            //old1=indicesOrder[n-ii];
-            old2=indicesOrder[n-ii-1];
+            old=indicesOrder[n-ii-1];
          }
 
          //highlighting lines of code
@@ -252,14 +235,6 @@ function setup_Graph(){
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
-    
-         //don't want to swap indices
-         // transition.select(".x.axis")
-         //    .call(xAxis)
-         //    .selectAll("g")
-         //    .delay(delay);
-         
-         console.log(n,ii);
 
       }
        
@@ -288,13 +263,6 @@ function setup_Graph(){
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
-
-         //don't want to swap indices
-         // transition.select(".x.axis")
-         //    .call(xAxis)
-         //    .selectAll("g")
-         //    .delay(delay);
-
       }
           
       function fastBackward(){
@@ -322,14 +290,6 @@ function setup_Graph(){
          transition.selectAll(".bar")
             .delay(delay)
             .attr("x", function(d) { return x0(d.index); });
-
-   //don't want to swap indices
-         //transition.select(".x.axis")
-            // .call(xAxis)
-            // .selectAll("g")
-            // .delay(delay);
-         console.log(n,ii);
-
       }
    });
 }
