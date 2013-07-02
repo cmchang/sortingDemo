@@ -16,3 +16,5 @@ bubbleSort_increase.js keeps an array for all the intermediate states of the inc
 insertSort_increase.js keeps an array for all the intermediate states of the increasing-order insertion sort, while insertSort_decrease.js keeps all the intermediate states for the decreasing-order bubble sort.  These files are read by demoGraphBubble.js and are necessary to animate the D3 graphs.
 
 sortingDemo.css is for embellishing components of our webpage.
+
+googlePrettify folder contains the javascript and css files to format the styling of the pseudocode and line numbering.
