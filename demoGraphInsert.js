@@ -178,7 +178,6 @@ function setup_Graph(){
             var temp2 = dataArray[indicesOrder[k]-1];
 
             $(".index"+oldK).css("color","#1c728e");
-
             $(".index" + (k-1)).text(temp1).css("color", "#369DBB");
             $(".index" + k).text(temp2).css("color", "#1c728e");
             oldK=k-1;
@@ -188,6 +187,7 @@ function setup_Graph(){
                      .attr("x", function(d,i) {return x0(d.index); });
          }else{
             svg.select("#ID"+(ii+1)).style("fill","black");
+            $(".index" + 0).text(temp1).css("color", "#1c728e");
          }
       }
 
@@ -198,6 +198,12 @@ function setup_Graph(){
                if(insertSort[n].length==0){
                   console.log(n+1)
                   svg.select("#ID"+(n+2)).style("fill","#369DBB");
+
+                  var temp1 = dataArray[n];
+                  var temp2 = dataArray[n+1];
+                  $(".index" + (n)).text(temp1).css("color", "#369DBB");
+                  $(".index" + (n+1)).text(temp2).css("color", "black");
+
                   a=decrement(n,ii);
                   n=a[0];
                   ii=a[1];
@@ -230,6 +236,7 @@ function setup_Graph(){
          n=a[0];
          ii=a[1];
          
+         old=-1
          oldK=-1;
          console.log(n,ii);
          if(ii==insertSort[n].length-1&&n>=1){
@@ -243,10 +250,8 @@ function setup_Graph(){
          }else{
             if(n>1){
                var indicesOrder=insertSort[n][ii].slice(0);
-               svg.select("#ID"+old).style("fill","#black");
                svg.select("#ID"+indicesOrder[n-ii-1]).style("fill","#888888");
                svg.select("#ID"+(indicesOrder[n-ii])).style("fill","black");
-               old=indicesOrder[n-ii-1];
 
                //change table on html page
                var k = n-ii;
